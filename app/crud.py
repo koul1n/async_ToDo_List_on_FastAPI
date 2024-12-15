@@ -1,3 +1,4 @@
+from sqlalchemy import delete
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.models import Task
 from sqlalchemy.future import select
@@ -29,3 +30,7 @@ async def delete_task(db: AsyncSession, task_id: int):
         await db.delete(task)
         await db.commit()
     return task
+
+async def delete_all_tasks(db: AsyncSession):
+    async with db.begin():
+        await db.execute(delete(Task))

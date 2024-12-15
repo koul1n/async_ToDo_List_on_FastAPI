@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-
+from datetime import datetime
 
 class TaskBase(BaseModel):
     title: str
@@ -11,7 +11,11 @@ class TaskBase(BaseModel):
 # Схема для возвращаемой задачи (с id и is_completed)
 class TaskResponse(TaskBase):
     id: int
+    title: str
+    description: str
     is_completed: bool
+    created_at: datetime
+
 
     class Config:
         orm_mode = True  # Это важно для работы с SQLAlchemy моделями

@@ -1,8 +1,8 @@
-"""initial async migration
+"""Initial async migration
 
-Revision ID: bf2ce9b05a20
+Revision ID: f674820d803a
 Revises: 
-Create Date: 2024-12-15 20:44:21.467454
+Create Date: 2024-12-15 21:52:36.025808
 
 """
 from typing import Sequence, Union
@@ -12,7 +12,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = 'bf2ce9b05a20'
+revision: str = 'f674820d803a'
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -25,6 +25,7 @@ def upgrade() -> None:
     sa.Column('title', sa.String(), nullable=False),
     sa.Column('description', sa.String(), nullable=False),
     sa.Column('is_completed', sa.Boolean(), nullable=False),
+    sa.Column('created_at', sa.DateTime(), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
     # ### end Alembic commands ###
