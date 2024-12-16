@@ -1,10 +1,8 @@
-from sqlalchemy.orm import Mapped, mapped_column, DeclarativeBase, relationship
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy import func, ForeignKey
 from datetime import datetime
+from app.database import Base
 
-
-class Base(DeclarativeBase):
-    pass
 
 
 class Task(Base):
@@ -21,6 +19,8 @@ class Task(Base):
     owner: Mapped["User"] = relationship("User", back_populates="tasks")
 
 
+
+
 class User(Base):
     __tablename__ = "users"
 
@@ -32,3 +32,4 @@ class User(Base):
 
     # Связь с задачами
     tasks: Mapped[list["Task"]] = relationship("Task", back_populates="owner")
+

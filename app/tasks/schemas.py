@@ -1,4 +1,4 @@
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel
 from datetime import datetime
 
 class TaskBase(BaseModel):
@@ -20,17 +20,3 @@ class TaskResponse(TaskBase):
     class Config:
         orm_mode = True  # Это важно для работы с SQLAlchemy моделями
         arbitrary_types_allowed = True
-
-class UserCreate(BaseModel):
-    username: str
-    email: EmailStr
-    password: str
-
-class UserResponse(BaseModel):
-    id: int
-    username: str
-    email: str
-    is_active: bool
-
-    class Config:
-        orm_mode = True
