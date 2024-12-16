@@ -2,8 +2,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from pydantic import EmailStr
 from app.models import User
 from sqlalchemy.future import select
-from fastapi import HTTPException
-from http import HTTPStatus
+from fastapi import HTTPException, status
 
 
 async def create_user(db: AsyncSession, username: str, email: EmailStr, password: str):
@@ -13,7 +12,7 @@ async def create_user(db: AsyncSession, username: str, email: EmailStr, password
 
     if existing_user:
         raise HTTPException(
-            status_code=HTTPStatus.BAD_REQUEST,
+            status_code=status.HTTP_400_BAD_REQUEST,
             detail=f"Пользователь с email {email} уже существует.",
         )
 

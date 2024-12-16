@@ -1,8 +1,7 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, status
 from app.tasks import TaskResponse, TaskBase, create_task, complete_task, delete_task, delete_all_tasks, get_tasks
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.database import get_db
-from http import HTTPStatus
 
 
 router = APIRouter(prefix="/tasks")
@@ -33,7 +32,7 @@ async def complete_task_route(
 ):
     task = await complete_task(db, task_id, user_id)
     if task is None:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="Task not found")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Task not found")
     return task
 
 
@@ -44,7 +43,7 @@ async def delete_task_route(
 ):
     task = await delete_task(db, task_id, user_id)
     if task is None:
-        raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="Task not found")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Task not found")
     return task
 
 
@@ -55,4 +54,4 @@ async def delete_all_tasks_route(user_id: int, db: AsyncSession = Depends(get_db
         await delete_all_tasks(db, user_id)
         return {"message": "All tasks deleted successfully"}
     except Exception as e:
-        raise HTTPException(status_code=HTTPStatus.INTERNAL_SERVER_ERROR, detail=str(e))
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
