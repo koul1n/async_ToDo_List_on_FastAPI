@@ -13,7 +13,7 @@ async def create_task_route(
     user_id: int, task: TaskBase, db: AsyncSession = Depends(get_db)
 ):
     new_task = await create_task(
-        db=db, title=task.title, description=task.description, user_id=user_id
+        db=db, title=task.title, description=task.description, user_id=user_id, deadline=task.deadline
     )
     return new_task
 

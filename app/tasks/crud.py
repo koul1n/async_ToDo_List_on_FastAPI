@@ -2,15 +2,16 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.models import Task
 from sqlalchemy.future import select
 from sqlalchemy import delete
+from datetime import datetime
 
 
 
 
 
 async def create_task(
-    db: AsyncSession, user_id: int, title: str, description: str = None
+    db: AsyncSession, user_id: int, title: str, description: str = None, deadline: datetime | None = None
 ):
-    task = Task(owner_id=user_id, title=title, description=description)
+    task = Task(owner_id=user_id, title=title, description=description, deadline = deadline)
     db.add(task)
     await db.commit()
     await db.refresh(task)

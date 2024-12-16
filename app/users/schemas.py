@@ -5,11 +5,19 @@ class UserCreate(BaseModel):
     username: str
     email: EmailStr
     password: str
+    class Config:
+        # Включаем использование атрибутов для сериализации
+        from_attributes = True
+        orm_mode = True
 
 class UserResponse(BaseModel):
-    model_config = ConfigDict(from_attributes=True)
     id: int
     username: str
     email: str
     is_active: bool
+
+    class Config:
+        # Включаем использование атрибутов для сериализации
+        from_attributes = True
+        orm_mode = True
 

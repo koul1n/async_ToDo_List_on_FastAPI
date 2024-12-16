@@ -16,6 +16,7 @@ async def create_user(db: AsyncSession, username: str, email: EmailStr, password
             detail=f"Пользователь с email {email} уже существует.",
         )
 
+
     user = User(username=username, email=email, password=password)
     db.add(user)
     await db.commit()
