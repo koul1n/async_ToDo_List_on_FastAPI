@@ -8,8 +8,8 @@ port = 8000
 
 app = FastAPI()
 
-app.include_router(task_router)
-app.include_router(user_router)
+app.include_router(task_router, tags=['tasks'])
+app.include_router(user_router, tags = ['users'])
 
 
 if __name__ == '__main__':
