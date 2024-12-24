@@ -1,14 +1,15 @@
-from pydantic import BaseModel, EmailStr, ConfigDict
+from pydantic import BaseModel, EmailStr
+
 
 
 class UserCreate(BaseModel):
     username: str
     email: EmailStr
     password: str
+
     class Config:
-        # Включаем использование атрибутов для сериализации
         from_attributes = True
-        orm_mode = True
+
 
 class UserResponse(BaseModel):
     id: int
@@ -17,7 +18,17 @@ class UserResponse(BaseModel):
     is_active: bool
 
     class Config:
-        # Включаем использование атрибутов для сериализации
         from_attributes = True
-        orm_mode = True
+
+
+
+class UserUpdate(BaseModel):
+    id: int
+    username: str | None
+    email: EmailStr | None
+
+    class Config:
+        from_attributes = True
+
+
 

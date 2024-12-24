@@ -1,9 +1,8 @@
 from logging.config import fileConfig
 from sqlalchemy import pool
-from sqlalchemy.engine import Connection
-from sqlalchemy.ext.asyncio import async_engine_from_config
+from sqlalchemy.ext.asyncio import async_engine_from_config, AsyncEngine
 from alembic import context
-from app.database import Base  # Импортируем Base из приложения (замени app.models на свой путь)
+from app.models import Base # Импорт вашей модели
 
 # Устанавливаем конфигурацию
 config = context.config
@@ -14,7 +13,6 @@ if config.config_file_name is not None:
 
 # Указываем метаданные для автогенерации
 target_metadata = Base.metadata
-
 
 def run_migrations_offline():
     """Запуск миграций в оффлайн-режиме."""
@@ -38,25 +36,35 @@ async def run_migrations_online():
         poolclass=pool.NullPool,
     )
 
-    async with connectable.connect() as connection:
-        await connection.run_sync(do_run_migrations)
+    try:
+        # Подключаемся асинхронно к базе данных
+        async with connectable.connect() as connection:
+            # Выполнение миграции с использованием синхронного метода
+            await connection.run_sync(do_run_migrations)
+    except Exception as e:
+        print(f"Error running migrations: {e}")
+    finally:
+        # Закрываем соединение
+        await connectable.dispose()
 
 
-def do_run_migrations(connection: Connection):
+def do_run_migrations(connection):
     """Функция для выполнения миграций."""
     context.configure(
         connection=connection,
         target_metadata=target_metadata,
-        render_as_batch=True,  # Если нужны изменения таблиц с SQLite
+        render_as_batch=True,  # Если нужно делать изменения с SQLite
     )
 
     with context.begin_transaction():
         context.run_migrations()
 
 
+# Проверка режима работы
 if context.is_offline_mode():
     run_migrations_offline()
 else:
     import asyncio
 
+    # Асинхронно выполняем миграции
     asyncio.run(run_migrations_online())

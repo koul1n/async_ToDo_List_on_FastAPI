@@ -1,1 +1,1 @@
-from .db import Base, get_db, DATABASE_URL, engine
+from .db import get_db, DATABASE_URL, engine

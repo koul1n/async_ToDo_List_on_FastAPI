@@ -1,8 +1,9 @@
-from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy.orm import Mapped, mapped_column, relationship, DeclarativeBase
 from sqlalchemy import func, ForeignKey
 from datetime import datetime
-from app.database import Base
 
+class Base(DeclarativeBase):
+    pass
 
 
 class Task(Base):
@@ -13,7 +14,7 @@ class Task(Base):
     description: Mapped[str] = mapped_column()
     is_completed: Mapped[bool] = mapped_column(default=False)
     created_at: Mapped[datetime] = mapped_column(default=func.now(), nullable=False)
-    deadline = Mapped[datetime] = mapped_column(nullable=True)
+    deadline : Mapped[datetime | None] = mapped_column(nullable=True)
 
     # Ссылка на пользователя
     owner_id: Mapped[int] = mapped_column(ForeignKey('users.id'), nullable=False)
@@ -32,5 +33,5 @@ class User(Base):
     is_active: Mapped[bool] = mapped_column(default=True)
 
     # Связь с задачами
-    tasks: Mapped[list["Task"]] = relationship("Task", back_populates="owner")
+    tasks: Mapped[list["Task"]] = relationship("Task", back_populates="owner", cascade="all, delete")
 
