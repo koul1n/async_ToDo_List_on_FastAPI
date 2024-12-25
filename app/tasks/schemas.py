@@ -1,8 +1,8 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, constr
 from datetime import datetime
 
 class TaskBase(BaseModel):
-    title: str
+    title: constr(min_length=3)
     description: str | None = None
     deadline: datetime | None = None
 
