@@ -5,6 +5,8 @@ import os
 load_dotenv()
 
 class Settings(BaseSettings):
+    DRIVER: str = os.getenv("DB_DRIVER")
+
     USERNAME: str = os.getenv("DB_USERNAME")
     PASS: str = os.getenv("DB_PASS")
     HOST: str = os.getenv("DB_HOST")
@@ -20,10 +22,10 @@ class Settings(BaseSettings):
 
 
     def dsn(self):
-        return f"postgresql+asyncpg://{self.USERNAME}:{self.PASS}@{self.HOST}:{self.PORT}/{self.NAME}"
+        return f"{self.DRIVER}://{self.USERNAME}:{self.PASS}@{self.HOST}:{self.PORT}/{self.NAME}"
 
-    def dns_for_test(self):
-        return f"postgresql+asyncpg://{self.USERNAME_TEST}:{self.PASS_TEST}@{self.HOST_TEST}:{self.PORT_TEST}/{self.NAME_TEST}"
+    def dsn_for_test(self):
+        return f"{self.DRIVER}://{self.USERNAME_TEST}:{self.PASS_TEST}@{self.HOST_TEST}:{self.PORT_TEST}/{self.NAME_TEST}"
 
 
 settings = Settings()

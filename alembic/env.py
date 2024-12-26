@@ -3,12 +3,12 @@ from sqlalchemy import pool
 from sqlalchemy.ext.asyncio import async_engine_from_config
 from alembic import context
 from app.models import Base
-import os
-from dotenv import load_dotenv
+from app.database import settings
 
-load_dotenv()
 
-DATABASE_URL = os.getenv("DATABASE_URL")
+DATABASE_URL = settings.dsn()
+
+DATABASE_TEST_URL = settings.dsn_for_test()
 
 # Устанавливаем конфигурацию
 config = context.config
@@ -22,7 +22,7 @@ target_metadata = Base.metadata
 
 def run_migrations_offline():
     """Запуск миграций в оффлайн-режиме."""
-    url = DATABASE_URL
+    url = DATABASE_TEST_URL
     context.configure(
         url=url,
         target_metadata=target_metadata,
@@ -40,7 +40,6 @@ async def run_migrations_online():
         config.get_section(config.config_ini_section),
         prefix="sqlalchemy.",
         poolclass=pool.NullPool,
-        url = DATABASE_URL
     )
 
     try:

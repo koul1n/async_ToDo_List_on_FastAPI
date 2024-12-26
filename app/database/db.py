@@ -20,4 +20,5 @@ class Database:
 
 database_helper = Database(settings.dsn())
 
-database_for_test = Database(settings.dns_for_test())
+database_for_test = Database(settings.dsn_for_test())
+

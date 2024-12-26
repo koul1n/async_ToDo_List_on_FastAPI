@@ -27,9 +27,9 @@ def task_data():
     return data
 
 @pytest.fixture(scope="function")
-def client():
-    # Переопределяем зависимость FastAPI на тестовую базу данных
+async def client():
     app.dependency_overrides[database_helper.get_db] = database_for_test.get_db
+
     with TestClient(app) as client:
         yield client
 
