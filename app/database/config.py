@@ -1,14 +1,22 @@
 from pydantic_settings import BaseSettings
+from dotenv import load_dotenv
+import os
+
+
+
+load_dotenv()
 
 class Settings(BaseSettings):
-    DB_USER: str = 'postgres'
-    DB_PASS: str = 'postgres'
-    DB_HOST: str = '127.0.0.1'
-    DB_PORT:str = '8000'
-    DB_NAME: str = 'postgres'
+    USERNAME: str = os.getenv("DB_USERNAME")
+    PASS: str = os.getenv("DB_PASS")
+    HOST: str = os.getenv("DB_HOST")
+    PORT: int = os.getenv("DB_PORT")
+    NAME: str = os.getenv("DB_NAME")
 
     def dsn(self):
-        return f"postgresql+asyncpg://{self.DB_USER}:{self.DB_PASS}@{self.DB_HOST}/{self.DB_NAME}"
+        return f"postgresql+asyncpg://{self.USERNAME}:{self.PASS}@{self.HOST}:{self.PORT}/{self.NAME}"
 
 settings = Settings()
+print(settings.dsn())
+
 

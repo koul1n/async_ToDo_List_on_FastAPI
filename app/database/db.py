@@ -1,6 +1,6 @@
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker
 DATABASE_URL = "postgresql+asyncpg://postgres:postgres@127.0.0.1/postgres"
-from .config import settings
+from app.database import settings
 
 
 class Database:
@@ -11,6 +11,7 @@ class Database:
                                                 expire_on_commit=False,
                                                 autocommit = False
                                                 )
+
 
     async def get_db(self):
         async with self.async_session() as session:

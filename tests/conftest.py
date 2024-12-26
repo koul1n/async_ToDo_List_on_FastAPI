@@ -1,7 +1,7 @@
 import pytest
 from faker import Faker
 from datetime import datetime, timedelta
-
+from fastapi.testclient import TestClient
 
 faker = Faker()
 
