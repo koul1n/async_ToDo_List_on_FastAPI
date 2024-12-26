@@ -2,8 +2,6 @@ from pydantic_settings import BaseSettings
 from dotenv import load_dotenv
 import os
 
-
-
 load_dotenv()
 
 class Settings(BaseSettings):
@@ -17,6 +15,5 @@ class Settings(BaseSettings):
         return f"postgresql+asyncpg://{self.USERNAME}:{self.PASS}@{self.HOST}:{self.PORT}/{self.NAME}"
 
 settings = Settings()
-print(settings.dsn())
 
 
