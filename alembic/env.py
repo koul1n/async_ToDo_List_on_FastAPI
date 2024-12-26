@@ -1,8 +1,14 @@
 from logging.config import fileConfig
 from sqlalchemy import pool
-from sqlalchemy.ext.asyncio import async_engine_from_config, AsyncEngine
+from sqlalchemy.ext.asyncio import async_engine_from_config
 from alembic import context
-from app.models import Base # Импорт вашей модели
+from app.models import Base
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+DATABASE_URL = os.getenv("DATABASE_URL")
 
 # Устанавливаем конфигурацию
 config = context.config
@@ -16,7 +22,7 @@ target_metadata = Base.metadata
 
 def run_migrations_offline():
     """Запуск миграций в оффлайн-режиме."""
-    url = config.get_main_option("sqlalchemy.url")
+    url = DATABASE_URL
     context.configure(
         url=url,
         target_metadata=target_metadata,
@@ -34,6 +40,7 @@ async def run_migrations_online():
         config.get_section(config.config_ini_section),
         prefix="sqlalchemy.",
         poolclass=pool.NullPool,
+        url = DATABASE_URL
     )
 
     try:
