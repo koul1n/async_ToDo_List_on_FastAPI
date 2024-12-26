@@ -1,4 +1,4 @@
-from pydantic import BaseModel, constr
+from pydantic import BaseModel, constr, ConfigDict
 from datetime import datetime
 
 class TaskBase(BaseModel):
@@ -6,9 +6,8 @@ class TaskBase(BaseModel):
     description: str | None = None
     deadline: datetime | None = None
 
+    model_config = ConfigDict(from_attributes=True)
 
-    class Config:
-        from_attributes = True
 
 
 
@@ -20,9 +19,7 @@ class TaskResponse(TaskBase):
     created_at: datetime
     deadline: datetime | None = None
 
-
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 

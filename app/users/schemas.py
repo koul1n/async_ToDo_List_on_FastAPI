@@ -1,15 +1,13 @@
-from pydantic import BaseModel, EmailStr, constr
+from pydantic import BaseModel, EmailStr, constr, ConfigDict
 
 
 
 class UserCreate(BaseModel):
     username: constr(min_length=3, max_length=20)
     email: EmailStr
-    password:  constr(min_length=5, max_length=20)
+    password: constr(min_length=5, max_length=20)
 
-    class Config:
-        from_attributes = True
-
+    model_config = ConfigDict(from_attributes=True)
 
 class UserResponse(BaseModel):
     id: int
@@ -17,8 +15,7 @@ class UserResponse(BaseModel):
     email: str
     is_active: bool
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 
@@ -27,8 +24,8 @@ class UserUpdate(BaseModel):
     username: str | None
     email: EmailStr | None
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
+
 
 
 
