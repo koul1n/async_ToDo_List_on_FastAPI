@@ -7,7 +7,7 @@ from app.database import database_helper
 router = APIRouter(prefix="/tasks")
 
 
-# Создание задачи для пользователя
+
 @router.post("/{user_id}/", response_model=TaskResponse)
 async def create_task_route(
     user_id: int, task: TaskBase, db: AsyncSession = Depends(database_helper.get_db)
@@ -18,14 +18,14 @@ async def create_task_route(
     return new_task
 
 
-# Получение всех задач для пользователя
+
 @router.get("/{user_id}/", response_model=list[TaskResponse])
 async def get_tasks_route(user_id: int, db: AsyncSession = Depends(database_helper.get_db)):
     tasks = await get_tasks(db=db, user_id=user_id)
     return tasks
 
 
-# Маршрут для завершения задачи пользователя
+
 @router.put("/{user_id}/{task_id}/complete/", response_model=TaskResponse)
 async def complete_task_route(
     user_id: int, task_id: int, db: AsyncSession = Depends(database_helper.get_db)
@@ -47,7 +47,7 @@ async def delete_task_route(
     return task
 
 
-# Удаление всех задач для пользователя
+
 @router.delete("/{user_id}/", response_model=dict)
 async def delete_all_tasks_route(user_id: int, db: AsyncSession = Depends(database_helper.get_db)):
     try:
