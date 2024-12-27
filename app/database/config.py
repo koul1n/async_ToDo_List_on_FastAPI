@@ -19,6 +19,10 @@ class Settings(BaseSettings):
     PORT_TEST: int = os.getenv("DB_TEST_PORT")
     NAME_TEST: str = os.getenv("DB_TEST_NAME")
 
+    SERVER_HOST:str = os.getenv("SERVER_HOST")
+
+    SERVER_PORT: int = os.getenv("SERVER_PORT")
+
 
 
     def dsn(self):
