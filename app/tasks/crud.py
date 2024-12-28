@@ -5,13 +5,16 @@ from sqlalchemy import delete
 from datetime import datetime
 
 
-
-
-
 async def create_task(
-    db: AsyncSession, user_id: int, title: str, description: str = None, deadline: datetime | None = None
+    db: AsyncSession,
+    user_id: int,
+    title: str,
+    description: str = None,
+    deadline: datetime | None = None,
 ):
-    task = Task(owner_id=user_id, title=title, description=description, deadline = deadline)
+    task = Task(
+        owner_id=user_id, title=title, description=description, deadline=deadline
+    )
     db.add(task)
     await db.commit()
     await db.refresh(task)
