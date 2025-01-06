@@ -3,6 +3,7 @@ import pytest_asyncio
 from faker import Faker
 from datetime import datetime, timedelta
 from httpx import AsyncClient
+from fastapi import status
 
 faker = Faker()
 
@@ -29,3 +30,16 @@ def task_data():
 async def async_client():
     async with AsyncClient() as async_client:
         yield async_client
+
+
+@pytest_asyncio.fixture
+async def auth_token(async_client, user_data):
+    user_data_for_login = {
+        "username" : user_data['email'],
+        "password" : user_data['password']
+    }
+    # Создаем пользователя (или логинимся) и получаем токен
+    response = await async_client.post("http://127.0.0.1:8000/users/login/", json=user_data_for_login)
+    assert response.status_code == status.HTTP_200_OK
+    response_json = response.json()
+    return response_json["access_token"]  # Предполагаем, что токен хранится в "access_token"
