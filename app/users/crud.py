@@ -4,7 +4,18 @@ from pydantic import EmailStr
 from app.models import User
 from sqlalchemy.future import select
 from fastapi import HTTPException, status
+from app.security import hash_password
 
+
+
+async def get_user_by_email(db : AsyncSession, email : EmailStr):
+    result = await db.execute(select(User).filter(User.email == email))
+    if result:
+        return result.scalars().first()
+    raise HTTPException(
+        status_code=status.HTTP_404_NOT_FOUND,
+        detail=f"Пользователь с email {email} не существует.",
+    )
 
 async def create_user(db: AsyncSession, username: str, email: EmailStr, password: str):
     # Проверка на существование пользователя с таким email
@@ -17,7 +28,8 @@ async def create_user(db: AsyncSession, username: str, email: EmailStr, password
             detail=f"Пользователь с email {email} уже существует.",
         )
 
-    user = User(username=username, email=email, password=password)
+
+    user = User(username=username, email=email, password=hash_password(password))
     db.add(user)
     await db.commit()
     await db.refresh(user)

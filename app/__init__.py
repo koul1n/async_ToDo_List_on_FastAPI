@@ -13,3 +13,4 @@ if os.getenv("TESTING"):  # Проверяем переменную окруже
 
 app.include_router(task_router, tags=["tasks"])
 app.include_router(user_router, tags=["users"])
+
