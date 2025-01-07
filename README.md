@@ -34,38 +34,46 @@
    cd <папка с проектом>
    ```
 
-   Структура проекта:
-   ```
-   .
-   ├── app
-   │   ├── database
-   │   │   ├── __init__.py
-   │   │   ├── config.py
-   │   │   └── db.py
-   │   ├── models
-   │   │   ├── __init__.py
-   │   │   └── models.py
-   │   ├── tasks
-   │   │   ├── __init__.py
-   │   │   ├── crud.py
-   │   │   ├── schemas.py
-   │   │   └── tasks_routes.py
-   │   └── users
-   │       ├── __init__.py
-   │       ├── crud.py
-   │       ├── schemas.py
-   │       └── users_routes.py
-   ├── tests
-   │   ├── __init__.py
-   │   ├── conftest.py
-   │   ├── pytest.ini
-   │   ├── test_tasks.py
-   │   └── test_users.py
-   ├── .env
-   ├── alembic.ini
-   ├── requirements.txt
-   ├── run.py
-   └── README.md
+   ## Структура проекта:
+
+```
+.
+├── app
+│   ├── database
+│   │   ├── __init__.py
+│   │   ├── config.py
+│   │   └── db.py
+│   ├── models
+│   │   ├── __init__.py
+│   │   └── models.py
+│   ├── security
+│   │   ├── __init__.py
+│   │   ├── auth.py
+│   │   ├── config.py
+│   │   ├── schemas.py
+│   │   └── utils.py
+│   ├── tasks
+│   │   ├── __init__.py
+│   │   ├── crud.py
+│   │   ├── schemas.py
+│   │   └── tasks_routes.py
+│   ├── users
+│   │   ├── __init__.py
+│   │   ├── crud.py
+│   │   ├── schemas.py
+│   │   └── users_routes.py
+├── tests
+│   ├── __init__.py
+│   ├── conftest.py
+│   ├── pytest.ini
+│   ├── test_tasks.py
+│   └── test_users.py
+├── .env
+├── alembic.ini
+├── requirements.txt
+├── run.py
+└── README.md
+
    ```
 
 2. Установите зависимости:
