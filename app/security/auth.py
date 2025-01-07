@@ -5,22 +5,12 @@ from app.security.utils import decode_jwt
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="users/login/")
 
-# def get_current_user(token: str = Depends(oauth2_scheme)) -> dict:
-#     try:
-#         user_data = decode_jwt(token)
-#         return user_data
-#     except Exception:
-#         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid or expired token")
-
 
 def get_current_user(token: str = Depends(oauth2_scheme)) -> dict:
-    print(f"Received token: {token}")  # Убедитесь, что токен получен
     try:
         user_data = decode_jwt(token)
-        print(f"Decoded token: {user_data}")  # Проверьте, что токен декодируется
         return user_data
-    except Exception as e:
-        print(f"Error decoding token: {e}")  # Логируйте ошибку
+    except Exception:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid or expired token")
 
 
