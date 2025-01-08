@@ -10,7 +10,6 @@ class UserCreate(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
 class UserResponse(BaseModel):
-    id: int
     username: str
     email: str
     is_active: bool
