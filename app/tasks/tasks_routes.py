@@ -10,18 +10,18 @@ from app.tasks import (
 )
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.database import database_helper
-from app.security import get_current_user, ensure_user_access
+from app.security import get_current_user
 
 
 router = APIRouter(prefix="/tasks")
 
 
 
-@router.post("/{user_id}/", response_model=TaskResponse)
+@router.post("/me/", response_model=TaskResponse)
 async def create_task_route(
-    user_id: int, task: TaskBase, db: AsyncSession = Depends(database_helper.get_db), current_user: dict = Depends(get_current_user)
+    task: TaskBase, db: AsyncSession = Depends(database_helper.get_db), current_user: dict = Depends(get_current_user)
 ):
-    await ensure_user_access(user_id = user_id, current_user = current_user)
+    user_id = int(current_user['sub'])
 
     new_task = await create_task(
         db=db,
@@ -33,21 +33,21 @@ async def create_task_route(
     return new_task
 
 
-@router.get("/{user_id}/", response_model=list[TaskResponse])
+@router.get("/me/", response_model=list[TaskResponse])
 async def get_tasks_route(
-    user_id: int, db: AsyncSession = Depends(database_helper.get_db), current_user: dict = Depends(get_current_user)
+   db: AsyncSession = Depends(database_helper.get_db), current_user: dict = Depends(get_current_user)
 ):
-    await ensure_user_access(user_id=user_id, current_user=current_user)
+    user_id = int(current_user['sub'])
 
     tasks = await get_tasks(db=db, user_id=user_id)
     return tasks
 
 
-@router.put("/{user_id}/{task_id}/complete/", response_model=TaskResponse)
+@router.put("/me/{task_id}/complete/", response_model=TaskResponse)
 async def complete_task_route(
-    user_id: int, task_id: int, db: AsyncSession = Depends(database_helper.get_db), current_user: dict = Depends(get_current_user)
+        task_id: int, db: AsyncSession = Depends(database_helper.get_db), current_user: dict = Depends(get_current_user)
 ):
-    await ensure_user_access(user_id=user_id, current_user=current_user)
+    user_id = int(current_user['sub'])
 
     task = await complete_task(db=db, task_id=task_id, user_id=user_id)
     if task is None:
@@ -57,11 +57,11 @@ async def complete_task_route(
     return task
 
 
-@router.delete("/{user_id}/{task_id}/", response_model=TaskResponse)
+@router.delete("/me/{task_id}/", response_model=TaskResponse)
 async def delete_task_route(
-    user_id: int, task_id: int, db: AsyncSession = Depends(database_helper.get_db), current_user: dict = Depends(get_current_user)
+    task_id: int, db: AsyncSession = Depends(database_helper.get_db), current_user: dict = Depends(get_current_user)
 ):
-    await ensure_user_access(user_id=user_id, current_user=current_user)
+    user_id = int(current_user['sub'])
 
     task = await delete_task(db=db, task_id=task_id, user_id=user_id)
     if task is None:
@@ -71,11 +71,11 @@ async def delete_task_route(
     return task
 
 
-@router.delete("/{user_id}/", response_model=dict)
+@router.delete("/me/", response_model=dict)
 async def delete_all_tasks_route(
-    user_id: int, db: AsyncSession = Depends(database_helper.get_db),  current_user: dict = Depends(get_current_user)
+    db: AsyncSession = Depends(database_helper.get_db),  current_user: dict = Depends(get_current_user)
 ):
-    await ensure_user_access(user_id=user_id, current_user=current_user)
+    user_id = int(current_user['sub'])
 
     try:
         await delete_all_tasks(db=db, user_id=user_id)
