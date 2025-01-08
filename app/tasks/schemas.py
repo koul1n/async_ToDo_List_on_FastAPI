@@ -10,14 +10,10 @@ class TaskBase(BaseModel):
 
 
 
-
 class TaskResponse(TaskBase):
     id: int
-    title: str
-    description: str
     is_completed: bool
     created_at: datetime
-    deadline: datetime | None = None
 
     model_config = ConfigDict(from_attributes=True)
 

@@ -40,6 +40,9 @@ async def test_get_task(async_client, user_data, task_data):
     headers = {"Authorization": f"Bearer {token}"}
     task_request = await async_client.post(f"http://127.0.0.1:8000/tasks/{user_id}/", json=task_data, headers=headers)
     assert task_request.status_code == status.HTTP_200_OK
+
+    assert all(task_request.json()[check] == task_data[check] for check in ["description", "title"])
+
     task_get_request = await async_client.get(f"http://127.0.0.1:8000/tasks/{user_id}/", headers=headers)
     assert task_get_request.status_code == status.HTTP_200_OK
 
