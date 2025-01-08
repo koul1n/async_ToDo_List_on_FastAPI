@@ -7,7 +7,7 @@ from app.users import (
     UserUpdate,
     get_user_info,
     delete_user,
-    get_user_by_email
+    get_user_by_email,
 )
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.database import database_helper
@@ -18,8 +18,10 @@ router = APIRouter(prefix="/users")
 
 
 @router.post("/login/", response_model=TokenInfo)
-async def login_route(form_data: OAuth2PasswordRequestForm = Depends(),
-                      db: AsyncSession = Depends(database_helper.get_db)):
+async def login_route(
+    form_data: OAuth2PasswordRequestForm = Depends(),
+    db: AsyncSession = Depends(database_helper.get_db),
+):
     # Получаем пользователя из базы данных по email
     user = await get_user_by_email(db=db, email=form_data.username)
 
@@ -31,8 +33,7 @@ async def login_route(form_data: OAuth2PasswordRequestForm = Depends(),
 
     # Если данные неверные, генерируем ошибку
     raise HTTPException(
-        status_code=status.HTTP_401_UNAUTHORIZED,
-        detail="Invalid credentials"
+        status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid credentials"
     )
 
 
@@ -48,9 +49,9 @@ async def create_user_route(
 async def update_user_route(
     user_update: UserUpdate,
     db: AsyncSession = Depends(database_helper.get_db),
-    current_user: dict = Depends(get_current_user)  # Добавляем проверку аутентификации
+    current_user: dict = Depends(get_current_user),  # Добавляем проверку аутентификации
 ):
-    user_id = int(current_user['sub'])
+    user_id = int(current_user["sub"])
 
     update_user = await update_user_info(
         db=db,
@@ -64,9 +65,9 @@ async def update_user_route(
 @router.get("/me/", response_model=UserResponse)
 async def get_user_info_route(
     db: AsyncSession = Depends(database_helper.get_db),
-    current_user: dict = Depends(get_current_user)  # Добавляем проверку аутентификации
+    current_user: dict = Depends(get_current_user),  # Добавляем проверку аутентификации
 ):
-    user_id = int(current_user['sub'])
+    user_id = int(current_user["sub"])
 
     user = await get_user_info(user_id=user_id, db=db)
     return user
@@ -75,8 +76,8 @@ async def get_user_info_route(
 @router.delete("/me/delete/", response_model=dict)
 async def delete_user_route(
     db: AsyncSession = Depends(database_helper.get_db),
-    current_user: dict = Depends(get_current_user)  # Добавляем проверку аутентификации
+    current_user: dict = Depends(get_current_user),  # Добавляем проверку аутентификации
 ):
-    user_id = int(current_user['sub'])
+    user_id = int(current_user["sub"])
 
     return await delete_user(db=db, user_id=user_id)
