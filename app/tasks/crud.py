@@ -19,7 +19,7 @@ async def create_task(
     await db.commit()
     await db.refresh(task)
     return task
-
+ 
 
 async def get_tasks(db: AsyncSession, user_id: int):
     result = await db.execute(select(Task).where(Task.owner_id == user_id))

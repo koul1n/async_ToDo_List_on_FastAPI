@@ -4,11 +4,12 @@ from faker import Faker
 
 fake = Faker()
 
+ENDPOINT = 'http://127.0.0.1:8000/api/v1'
 
 @pytest.mark.asyncio
 async def test_create_user(async_client, user_data):
     request = await async_client.post(
-        "http://127.0.0.1:8000/users/register/", json=user_data
+        f"{ENDPOINT}/users/register/", json=user_data
     )
     assert request.status_code == status.HTTP_200_OK
     response_json = request.json()
@@ -21,12 +22,12 @@ async def test_create_user(async_client, user_data):
 async def test_login_user(async_client, user_data):
     # Сначала создаем пользователя
     create_user_response = await async_client.post(
-        "http://127.0.0.1:8000/users/register/", json=user_data
+        f"{ENDPOINT}/users/register/", json=user_data
     )
     assert create_user_response.status_code == status.HTTP_200_OK
     # Логинимся
     response = await async_client.post(
-        "http://127.0.0.1:8000/users/login/",
+        f"{ENDPOINT}/users/login/",
         data={"username": user_data["email"], "password": user_data["password"]},
     )
 
@@ -40,12 +41,12 @@ async def test_login_user(async_client, user_data):
 async def test_get_user(async_client, user_data):
     # Сначала создаем пользователя
     create_user_response = await async_client.post(
-        "http://127.0.0.1:8000/users/register/", json=user_data
+        f"{ENDPOINT}/users/register/", json=user_data
     )
     assert create_user_response.status_code == status.HTTP_200_OK
     # Логинимся
     response = await async_client.post(
-        "http://127.0.0.1:8000/users/login/",
+        f"{ENDPOINT}/users/login/",
         data={"username": user_data["email"], "password": user_data["password"]},
     )
 
@@ -54,7 +55,7 @@ async def test_get_user(async_client, user_data):
     token = response_json["access_token"]
     headers = {"Authorization": f"Bearer {token}"}
     get_request = await async_client.get(
-        f"http://127.0.0.1:8000/users/me/", headers=headers
+        f"{ENDPOINT}/users/me/", headers=headers
     )
     assert get_request.status_code == status.HTTP_200_OK
 
@@ -63,12 +64,12 @@ async def test_get_user(async_client, user_data):
 async def test_delete_user(async_client, user_data):
     # Сначала создаем пользователя
     create_user_response = await async_client.post(
-        "http://127.0.0.1:8000/users/register/", json=user_data
+        f"{ENDPOINT}/users/register/", json=user_data
     )
     assert create_user_response.status_code == status.HTTP_200_OK
     # Логинимся
     response = await async_client.post(
-        "http://127.0.0.1:8000/users/login/",
+        f"{ENDPOINT}/users/login/",
         data={"username": user_data["email"], "password": user_data["password"]},
     )
 
@@ -77,7 +78,7 @@ async def test_delete_user(async_client, user_data):
     token = response_json["access_token"]
     headers = {"Authorization": f"Bearer {token}"}
     delete_request = await async_client.delete(
-        f"http://127.0.0.1:8000/users/me/delete/", headers=headers
+        f"{ENDPOINT}/users/me/delete/", headers=headers
     )
     assert delete_request.status_code == status.HTTP_200_OK
 
@@ -86,12 +87,12 @@ async def test_delete_user(async_client, user_data):
 async def test_update_user(async_client, user_data):
     # Сначала создаем пользователя
     create_user_response = await async_client.post(
-        "http://127.0.0.1:8000/users/register/", json=user_data
+        f"{ENDPOINT}/users/register/", json=user_data
     )
     assert create_user_response.status_code == status.HTTP_200_OK
     # Логинимся
     response = await async_client.post(
-        "http://127.0.0.1:8000/users/login/",
+        f"{ENDPOINT}/users/login/",
         data={"username": user_data["email"], "password": user_data["password"]},
     )
 
@@ -101,6 +102,6 @@ async def test_update_user(async_client, user_data):
     headers = {"Authorization": f"Bearer {token}"}
     data = {"username": fake.user_name(), "email": fake.email()}
     update_request = await async_client.patch(
-        f"http://127.0.0.1:8000/users/me/update/", headers=headers, json=data
+        f"{ENDPOINT}/users/me/update/", headers=headers, json=data
     )
     assert update_request.status_code == status.HTTP_200_OK
