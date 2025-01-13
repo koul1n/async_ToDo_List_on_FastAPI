@@ -19,6 +19,36 @@ async def create_task(
     await db.commit()
     await db.refresh(task)
     return task
+
+async def update_task(
+        db : AsyncSession,
+        user_id : int,
+        task_id : int,
+        title : str | None = None,
+        description : str | None = None,
+        deadline: datetime | None = None
+):
+    result = await db.execute(select(Task).filter(Task.id == task_id).filter(Task.owner_id == user_id))
+    task = result.scalars().first()
+
+    if title:
+        task.title = title
+
+    if description:
+        task.description = description
+
+    if deadline:
+        task.deadline = deadline
+
+    db.add(task)
+    await db.commit()
+    await db.refresh(task)
+    return task
+
+
+
+
+
  
 
 async def get_tasks(db: AsyncSession, user_id: int):

@@ -6,7 +6,7 @@ from app.tasks import (
     complete_task,
     delete_task,
     delete_all_tasks,
-    get_tasks,
+    get_tasks, TaskUpdate, update_task
 )
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.database import database_helper
@@ -60,6 +60,21 @@ async def complete_task_route(
         )
     return task
 
+@router.patch("/me/update/")
+async def update_task_route(
+        task : TaskUpdate,
+        db : AsyncSession = Depends(database_helper.get_db),
+        current_user : dict = Depends(get_current_user)
+):
+    new_task = await update_task(
+        db = db,
+        task_id=task.id,
+        user_id=int(current_user['sub']),
+        title=task.title,
+        deadline=task.deadline,
+        description=task.description
+    )
+    return new_task
 
 @router.delete("/me/{task_id}/", response_model=TaskResponse)
 async def delete_task_route(
