@@ -12,7 +12,7 @@ app = FastAPI()
 if os.getenv("TESTING"):  # Проверяем переменную окружения
     app.dependency_overrides[database_helper.get_db] = database_for_test.get_db
 
-app.include_router(task_router, tags=["tasks"], prefix='/api/v1')
-app.include_router(user_router, tags=["users"], prefix='/api/v1')
+app.include_router(task_router, tags=["tasks"])
+app.include_router(user_router, tags=["users"])
 
 

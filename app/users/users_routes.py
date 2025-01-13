@@ -14,7 +14,7 @@ from app.database import database_helper
 from app.security import get_current_user, validate_password, create_jwt, TokenInfo
 from fastapi.security import OAuth2PasswordRequestForm
 
-router = APIRouter(prefix="/users")
+router = APIRouter(prefix="/api/v1/users")
 
 
 @router.post("/login/", response_model=TokenInfo)

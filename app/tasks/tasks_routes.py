@@ -13,7 +13,7 @@ from app.database import database_helper
 from app.security import get_current_user
 
 
-router = APIRouter(prefix="/tasks")
+router = APIRouter(prefix="/api/v1/tasks")
 
 
 @router.post("/me/", response_model=TaskResponse)
