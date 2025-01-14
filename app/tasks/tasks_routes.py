@@ -13,6 +13,13 @@ from app.database import database_helper
 from app.security import get_current_user
 
 
+"""
+Модуль для работы с задачами API.
+
+Этот модуль содержит маршруты для выполнения CRUD операций с задачами:
+создание, получение, обновление, завершение и удаление задач, а также удаление всех задач пользователя.
+Используется FastAPI для обработки запросов и взаимодействия с базой данных через SQLAlchemy.
+"""
 router = APIRouter(prefix="/api/v1/tasks")
 
 
@@ -22,6 +29,19 @@ async def create_task_route(
     db: AsyncSession = Depends(database_helper.get_db),
     current_user: dict = Depends(get_current_user),
 ):
+    """
+    Создание новой задачи для текущего пользователя.
+
+    Принимает данные задачи, создает задачу в базе данных и возвращает её.
+
+    Параметры:
+    - task (TaskBase): Данные задачи (заголовок, описание, дедлайн).
+    - db (AsyncSession): Сессия базы данных.
+    - current_user (dict): Данные текущего пользователя, извлекаются из JWT токена.
+
+    Возвращает:
+    - TaskResponse: Созданная задача.
+    """
     user_id = int(current_user["sub"])
 
     new_task = await create_task(
@@ -39,6 +59,18 @@ async def get_tasks_route(
     db: AsyncSession = Depends(database_helper.get_db),
     current_user: dict = Depends(get_current_user),
 ):
+    """
+       Получение списка всех задач текущего пользователя.
+
+       Возвращает все задачи, которые принадлежат текущему пользователю.
+
+       Параметры:
+       - db (AsyncSession): Сессия базы данных.
+       - current_user (dict): Данные текущего пользователя, извлекаются из JWT токена.
+
+       Возвращает:
+       - list[TaskResponse]: Список задач пользователя.
+    """
     user_id = int(current_user["sub"])
 
     tasks = await get_tasks(db=db, user_id=user_id)
@@ -51,6 +83,22 @@ async def complete_task_route(
     db: AsyncSession = Depends(database_helper.get_db),
     current_user: dict = Depends(get_current_user),
 ):
+    """
+        Завершение задачи.
+
+        Обновляет статус задачи на "завершена" для указанного пользователя.
+
+        Параметры:
+        - task_id (int): Идентификатор задачи.
+        - db (AsyncSession): Сессия базы данных.
+        - current_user (dict): Данные текущего пользователя, извлекаются из JWT токена.
+
+        Возвращает:
+        - TaskResponse: Обновленная задача.
+
+        Исключения:
+        - HTTPException: Если задача не найдена, генерируется ошибка 404.
+    """
     user_id = int(current_user["sub"])
 
     task = await complete_task(db=db, task_id=task_id, user_id=user_id)
@@ -60,12 +108,25 @@ async def complete_task_route(
         )
     return task
 
-@router.patch("/me/update/")
+@router.patch("/me/update/", response_model=TaskResponse)
 async def update_task_route(
         task : TaskUpdate,
         db : AsyncSession = Depends(database_helper.get_db),
         current_user : dict = Depends(get_current_user)
 ):
+    """
+       Обновление данных существующей задачи.
+
+       Обновляет данные задачи для текущего пользователя, включая заголовок, описание и дедлайн.
+
+       Параметры:
+       - task (TaskUpdate): Обновленные данные задачи.
+       - db (AsyncSession): Сессия базы данных.
+       - current_user (dict): Данные текущего пользователя, извлекаются из JWT токена.
+
+       Возвращает:
+       - TaskResponse: Обновленная задача.
+    """
     new_task = await update_task(
         db = db,
         task_id=task.id,
@@ -82,6 +143,22 @@ async def delete_task_route(
     db: AsyncSession = Depends(database_helper.get_db),
     current_user: dict = Depends(get_current_user),
 ):
+    """
+    Удаление задачи.
+
+    Удаляет задачу с указанным идентификатором, если она принадлежит текущему пользователю.
+
+    Параметры:
+    - task_id (int): Идентификатор задачи.
+    - db (AsyncSession): Сессия базы данных.
+    - current_user (dict): Данные текущего пользователя, извлекаются из JWT токена.
+
+    Возвращает:
+    - TaskResponse: Удаленная задача.
+
+    Исключения:
+    - HTTPException: Если задача не найдена, генерируется ошибка 404.
+    """
     user_id = int(current_user["sub"])
 
     task = await delete_task(db=db, task_id=task_id, user_id=user_id)
@@ -97,12 +174,27 @@ async def delete_all_tasks_route(
     db: AsyncSession = Depends(database_helper.get_db),
     current_user: dict = Depends(get_current_user),
 ):
+    """
+       Удаление всех задач текущего пользователя.
+
+       Удаляет все задачи, принадлежащие текущему пользователю.
+
+       Параметры:
+       - db (AsyncSession): Сессия базы данных.
+       - current_user (dict): Данные текущего пользователя, извлекаются из JWT токена.
+
+       Возвращает:
+       - dict: Сообщение об успешном удалении всех задач.
+
+       Исключения:
+       - HTTPException: Если возникла ошибка при удалении задач, генерируется ошибка 404.
+    """
     user_id = int(current_user["sub"])
 
     try:
         await delete_all_tasks(db=db, user_id=user_id)
         return {"message": "Все задачи удалены."}
-    except Exception as e:
+    except Exception:
         raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e)
+            status_code=status.HTTP_404_NOT_FOUND, detail="Не найдено задач для удаления"
         )

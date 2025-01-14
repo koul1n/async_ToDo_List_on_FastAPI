@@ -2,9 +2,17 @@ from pydantic_settings import BaseSettings
 from dotenv import load_dotenv
 import os
 
+"""
+Модуль для управления конфигурацией приложения с использованием Pydantic и переменных окружения.
+
+Этот модуль загружает параметры из `.env` файла и предоставляет удобные методы для
+получения строк подключения к базам данных для основного приложения и тестов.
+"""
+
 load_dotenv()
 
 class Settings(BaseSettings):
+
     DRIVER: str = os.getenv("DB_DRIVER")
 
     USERNAME: str = os.getenv("DB_USERNAME")
