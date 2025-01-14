@@ -1,3 +1,5 @@
+from http.client import HTTPException
+from fastapi import HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.models import Task
 from sqlalchemy.future import select
@@ -30,6 +32,8 @@ async def update_task(
 ):
     result = await db.execute(select(Task).filter(Task.id == task_id).filter(Task.owner_id == user_id))
     task = result.scalars().first()
+    if not task:
+        raise HTTPException(status_code = status.HTTP_404_NOT_FOUND, detail="Задача не найдена")
 
     if title:
         task.title = title
