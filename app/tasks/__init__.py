@@ -1,3 +1,10 @@
+from .crud import (
+    complete_task,
+    create_task,
+    delete_all_tasks,
+    delete_task,
+    get_tasks,
+    update_task,
+)
 from .schemas import TaskBase, TaskResponse, TaskUpdate
-from .crud import create_task, complete_task, delete_task, delete_all_tasks, get_tasks, update_task
 from .tasks_routes import router

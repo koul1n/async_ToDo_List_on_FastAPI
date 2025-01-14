@@ -1,6 +1,7 @@
-from pydantic_settings import BaseSettings
-from dotenv import load_dotenv
 import os
+
+from dotenv import load_dotenv
+from pydantic_settings import BaseSettings
 
 """
 Модуль для управления конфигурацией приложения с использованием Pydantic и переменных окружения.
@@ -10,6 +11,7 @@ import os
 """
 
 load_dotenv()
+
 
 class Settings(BaseSettings):
 
@@ -27,11 +29,9 @@ class Settings(BaseSettings):
     PORT_TEST: int = os.getenv("DB_TEST_PORT")
     NAME_TEST: str = os.getenv("DB_TEST_NAME")
 
-    SERVER_HOST:str = os.getenv("SERVER_HOST")
+    SERVER_HOST: str = os.getenv("SERVER_HOST")
 
     SERVER_PORT: int = os.getenv("SERVER_PORT")
-
-
 
     def dsn(self):
         return f"{self.DRIVER}://{self.USERNAME}:{self.PASS}@{self.HOST}:{self.PORT}/{self.NAME}"
@@ -41,5 +41,3 @@ class Settings(BaseSettings):
 
 
 settings = Settings()
-
-

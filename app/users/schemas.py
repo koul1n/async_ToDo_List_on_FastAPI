@@ -1,5 +1,4 @@
-from pydantic import BaseModel, EmailStr, constr, ConfigDict
-
+from pydantic import BaseModel, ConfigDict, EmailStr, constr
 
 
 class UserCreate(BaseModel):
@@ -16,26 +15,29 @@ class UserCreate(BaseModel):
         password (str): Пароль пользователя, длина которого должна быть от 5 до 20 символов.
 
     """
+
     username: constr(min_length=3, max_length=20)
     email: EmailStr
     password: constr(min_length=5, max_length=20)
 
     model_config = ConfigDict(from_attributes=True)
 
+
 class UserResponse(BaseModel):
     """
-       Модель для ответа при запросе данных пользователя.
+    Модель для ответа при запросе данных пользователя.
 
-       Эта модель используется для возврата информации о пользователе, такой как
-       имя, email и статус активности. Она не включает в себя конфиденциальную информацию,
-       такую как пароль, и предоставляет только публичные данные.
+    Эта модель используется для возврата информации о пользователе, такой как
+    имя, email и статус активности. Она не включает в себя конфиденциальную информацию,
+    такую как пароль, и предоставляет только публичные данные.
 
-       Атрибуты:
-           username (str): Имя пользователя.
-           email (str): Электронная почта пользователя.
-           is_active (bool): Статус активности пользователя (активен или нет).
+    Атрибуты:
+        username (str): Имя пользователя.
+        email (str): Электронная почта пользователя.
+        is_active (bool): Статус активности пользователя (активен или нет).
 
     """
+
     username: str
     email: str
     is_active: bool
@@ -43,27 +45,19 @@ class UserResponse(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
 
-
 class UserUpdate(BaseModel):
     """
-        Модель для обновления информации пользователя.
+    Модель для обновления информации пользователя.
 
-        Эта модель используется для обновления данных пользователя. Поля могут быть
-        переданы как `None`, что означает отсутствие изменения в этом поле.
+    Эта модель используется для обновления данных пользователя. Поля могут быть
+    переданы как `None`, что означает отсутствие изменения в этом поле.
 
-        Атрибуты:
-            username (str | None): Новое имя пользователя. Если не передано, оно не изменяется.
-            email (EmailStr | None): Новый email пользователя. Если не передан, он не изменяется.
+    Атрибуты:
+        username (str | None): Новое имя пользователя. Если не передано, оно не изменяется.
+        email (EmailStr | None): Новый email пользователя. Если не передан, он не изменяется.
 
     """
+
     username: str | None
     email: EmailStr | None
     model_config = ConfigDict(from_attributes=True)
-
-
-
-
-
-
-
-

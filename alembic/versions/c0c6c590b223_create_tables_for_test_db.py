@@ -5,15 +5,15 @@ Revises: 073a2143e433
 Create Date: 2024-12-26 14:09:48.802588
 
 """
+
 from typing import Sequence, Union
 
-from alembic import op
 import sqlalchemy as sa
-
+from alembic import op
 
 # revision identifiers, used by Alembic.
-revision: str = 'c0c6c590b223'
-down_revision: Union[str, None] = '073a2143e433'
+revision: str = "c0c6c590b223"
+down_revision: Union[str, None] = "073a2143e433"
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
 

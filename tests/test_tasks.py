@@ -1,7 +1,8 @@
 import pytest
 from fastapi import status
 
-ENDPOINT = 'http://127.0.0.1:8000/api/v1'
+ENDPOINT = "http://127.0.0.1:8000/api/v1"
+
 
 @pytest.mark.asyncio
 async def test_create_task(async_client, user_data, task_data):
@@ -53,9 +54,7 @@ async def test_get_task(async_client, user_data, task_data):
         for check in ["description", "title"]
     )
 
-    task_get_request = await async_client.get(
-        f"{ENDPOINT}/tasks/me/", headers=headers
-    )
+    task_get_request = await async_client.get(f"{ENDPOINT}/tasks/me/", headers=headers)
     assert task_get_request.status_code == status.HTTP_200_OK
 
 

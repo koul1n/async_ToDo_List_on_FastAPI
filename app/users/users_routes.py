@@ -1,18 +1,19 @@
 from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi.security import OAuth2PasswordRequestForm
+from sqlalchemy.ext.asyncio import AsyncSession
+
+from app.database import database_helper
+from app.security import TokenInfo, create_jwt, get_current_user, validate_password
 from app.users import (
-    UserResponse,
     UserCreate,
-    create_user,
-    update_user_info,
+    UserResponse,
     UserUpdate,
-    get_user_info,
+    create_user,
     delete_user,
     get_user_by_email,
+    get_user_info,
+    update_user_info,
 )
-from sqlalchemy.ext.asyncio import AsyncSession
-from app.database import database_helper
-from app.security import get_current_user, validate_password, create_jwt, TokenInfo
-from fastapi.security import OAuth2PasswordRequestForm
 
 router = APIRouter(prefix="/api/v1/users")
 
@@ -23,21 +24,21 @@ async def login_route(
     db: AsyncSession = Depends(database_helper.get_db),
 ):
     """
-       Авторизация пользователя с использованием email и пароля.
+    Авторизация пользователя с использованием email и пароля.
 
-       Этот маршрут обрабатывает запрос на вход в систему. Он принимает данные формы
-       с email (в качестве имени пользователя) и паролем, проверяет их, и если данные корректны,
-       генерирует JWT токен для аутентификации.
+    Этот маршрут обрабатывает запрос на вход в систему. Он принимает данные формы
+    с email (в качестве имени пользователя) и паролем, проверяет их, и если данные корректны,
+    генерирует JWT токен для аутентификации.
 
-       Args:
-           form_data (OAuth2PasswordRequestForm): Данные для входа в систему (email и пароль).
-           db (AsyncSession): Сессия базы данных для взаимодействия с пользователями.
+    Args:
+        form_data (OAuth2PasswordRequestForm): Данные для входа в систему (email и пароль).
+        db (AsyncSession): Сессия базы данных для взаимодействия с пользователями.
 
-       Raises:
-           HTTPException: В случае некорректных данных для входа (неправильный пароль или email).
+    Raises:
+        HTTPException: В случае некорректных данных для входа (неправильный пароль или email).
 
-       Returns:
-           TokenInfo: JWT токен для аутентификации пользователя.
+    Returns:
+        TokenInfo: JWT токен для аутентификации пользователя.
     """
     user = await get_user_by_email(db=db, email=form_data.username)
 
@@ -55,20 +56,20 @@ async def create_user_route(
     user: UserCreate, db: AsyncSession = Depends(database_helper.get_db)
 ):
     """
-        Регистрация нового пользователя.
+    Регистрация нового пользователя.
 
-        Этот маршрут позволяет создать нового пользователя в системе. При этом проверяется,
-        существует ли уже пользователь с таким email. Если пользователь существует, возвращается ошибка.
+    Этот маршрут позволяет создать нового пользователя в системе. При этом проверяется,
+    существует ли уже пользователь с таким email. Если пользователь существует, возвращается ошибка.
 
-        Args:
-            user (UserCreate): Данные пользователя для регистрации.
-            db (AsyncSession): Сессия базы данных для взаимодействия с пользователями.
+    Args:
+        user (UserCreate): Данные пользователя для регистрации.
+        db (AsyncSession): Сессия базы данных для взаимодействия с пользователями.
 
-        Returns:
-            UserResponse: Данные о зарегистрированном пользователе.
+    Returns:
+        UserResponse: Данные о зарегистрированном пользователе.
 
-        Raises:
-            HTTPException: В случае, если пользователь с таким email уже существует.
+    Raises:
+        HTTPException: В случае, если пользователь с таким email уже существует.
     """
     new_user = await create_user(db, user.username, user.email, user.password)
     return new_user
@@ -81,21 +82,21 @@ async def update_user_route(
     current_user: dict = Depends(get_current_user),  # Добавляем проверку аутентификации
 ):
     """
-       Обновление информации о текущем пользователе.
+    Обновление информации о текущем пользователе.
 
-       Этот маршрут позволяет пользователю обновить своё имя и email. Только аутентифицированные
-       пользователи могут обновить свои данные.
+    Этот маршрут позволяет пользователю обновить своё имя и email. Только аутентифицированные
+    пользователи могут обновить свои данные.
 
-       Args:
-           user_update (UserUpdate): Данные для обновления (имя пользователя и email).
-           db (AsyncSession): Сессия базы данных для взаимодействия с пользователями.
-           current_user (dict): Данные о текущем пользователе (получаем из JWT токена).
+    Args:
+        user_update (UserUpdate): Данные для обновления (имя пользователя и email).
+        db (AsyncSession): Сессия базы данных для взаимодействия с пользователями.
+        current_user (dict): Данные о текущем пользователе (получаем из JWT токена).
 
-       Returns:
-           UserResponse: Обновленные данные пользователя.
+    Returns:
+        UserResponse: Обновленные данные пользователя.
 
-       Raises:
-           HTTPException: В случае, если пользователь не найден или данные для обновления некорректны.
+    Raises:
+        HTTPException: В случае, если пользователь не найден или данные для обновления некорректны.
     """
     user_id = int(current_user["sub"])
 
@@ -114,20 +115,20 @@ async def get_user_info_route(
     current_user: dict = Depends(get_current_user),  # Добавляем проверку аутентификации
 ):
     """
-        Получение информации о текущем пользователе.
+    Получение информации о текущем пользователе.
 
-        Этот маршрут возвращает информацию о текущем пользователе, включая имя и email.
-        Только аутентифицированные пользователи могут получить доступ к этим данным.
+    Этот маршрут возвращает информацию о текущем пользователе, включая имя и email.
+    Только аутентифицированные пользователи могут получить доступ к этим данным.
 
-        Args:
-            db (AsyncSession): Сессия базы данных для взаимодействия с пользователями.
-            current_user (dict): Данные о текущем пользователе (получаем из JWT токена).
+    Args:
+        db (AsyncSession): Сессия базы данных для взаимодействия с пользователями.
+        current_user (dict): Данные о текущем пользователе (получаем из JWT токена).
 
-        Returns:
-            UserResponse: Данные о текущем пользователе.
+    Returns:
+        UserResponse: Данные о текущем пользователе.
 
-        Raises:
-            HTTPException: В случае, если пользователь не найден.
+    Raises:
+        HTTPException: В случае, если пользователь не найден.
     """
     user_id = int(current_user["sub"])
 
@@ -141,20 +142,20 @@ async def delete_user_route(
     current_user: dict = Depends(get_current_user),  # Добавляем проверку аутентификации
 ):
     """
-        Удаление текущего пользователя.
+    Удаление текущего пользователя.
 
-        Этот маршрут позволяет пользователю удалить свою учетную запись. Только аутентифицированные
-        пользователи могут удалить свои данные.
+    Этот маршрут позволяет пользователю удалить свою учетную запись. Только аутентифицированные
+    пользователи могут удалить свои данные.
 
-        Args:
-            db (AsyncSession): Сессия базы данных для взаимодействия с пользователями.
-            current_user (dict): Данные о текущем пользователе (получаем из JWT токена).
+    Args:
+        db (AsyncSession): Сессия базы данных для взаимодействия с пользователями.
+        current_user (dict): Данные о текущем пользователе (получаем из JWT токена).
 
-        Returns:
-            dict: Сообщение об успешном удалении пользователя.
+    Returns:
+        dict: Сообщение об успешном удалении пользователя.
 
-        Raises:
-            HTTPException: В случае, если пользователь не найден.
+    Raises:
+        HTTPException: В случае, если пользователь не найден.
     """
     user_id = int(current_user["sub"])
 

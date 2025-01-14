@@ -1,6 +1,7 @@
-from pydantic_settings import BaseSettings
 import os
+
 from dotenv import load_dotenv
+from pydantic_settings import BaseSettings
 
 """
 Модуль для настройки параметров аутентификации с использованием Pydantic и переменных окружения.
@@ -14,20 +15,21 @@ load_dotenv()
 
 class AuthSettings(BaseSettings):
     """
-      Класс для управления настройками аутентификации.
+    Класс для управления настройками аутентификации.
 
-      Этот класс загружает параметры из переменных окружения, которые используются
-      для генерации и проверки JWT токенов.
+    Этот класс загружает параметры из переменных окружения, которые используются
+    для генерации и проверки JWT токенов.
 
-      Атрибуты:
-          SECRET_KEY (str): Секретный ключ для создания и проверки токенов.
-          ALGORITHM (str): Алгоритм для подписи токенов (например, 'HS256').
-          expires_in (int): Время жизни токена в минутах (по умолчанию 15 минут).
-      """
+    Атрибуты:
+        SECRET_KEY (str): Секретный ключ для создания и проверки токенов.
+        ALGORITHM (str): Алгоритм для подписи токенов (например, 'HS256').
+        expires_in (int): Время жизни токена в минутах (по умолчанию 15 минут).
+    """
 
     SECRET_KEY: str = os.getenv("SECRET_KEY")
     ALGORITHM: str = os.getenv("ALGORITHM")
     expires_in: int = 15
+
 
 auth_settings = AuthSettings()
 

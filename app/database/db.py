@@ -1,5 +1,7 @@
-from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker
+from sqlalchemy.ext.asyncio import async_sessionmaker, create_async_engine
+
 from .config import settings
+
 """
 Модуль для настройки асинхронного подключения к базе данных с использованием SQLAlchemy.
 
@@ -7,6 +9,8 @@ from .config import settings
 асинхронного движка и сессий для работы с базой данных. Также настраиваются
 основные подключения для основного приложения и тестов.
 """
+
+
 class Database:
 
     def __init__(self, link):

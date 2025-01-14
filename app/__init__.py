@@ -1,12 +1,12 @@
-from fastapi import FastAPI
-from app.users.users_routes import router as user_router
-from app.tasks.tasks_routes import router as task_router
-from app.database import database_helper, database_for_test
 import os
 
+from fastapi import FastAPI
+
+from app.database import database_for_test, database_helper
+from app.tasks.tasks_routes import router as task_router
+from app.users.users_routes import router as user_router
 
 app = FastAPI()
-
 
 
 if os.getenv("TESTING"):  # Проверяем переменную окружения
@@ -14,5 +14,3 @@ if os.getenv("TESTING"):  # Проверяем переменную окруже
 
 app.include_router(task_router, tags=["tasks"])
 app.include_router(user_router, tags=["users"])
-
-

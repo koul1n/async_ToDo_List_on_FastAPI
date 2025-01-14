@@ -1,14 +1,14 @@
+from fastapi import HTTPException, status
+from pydantic import EmailStr
 from sqlalchemy import delete
 from sqlalchemy.ext.asyncio import AsyncSession
-from pydantic import EmailStr
-from app.models import User
 from sqlalchemy.future import select
-from fastapi import HTTPException, status
+
+from app.models import User
 from app.security import hash_password
 
 
-
-async def get_user_by_email(db : AsyncSession, email : EmailStr):
+async def get_user_by_email(db: AsyncSession, email: EmailStr):
     """
     Получение пользователя из базы данных по его email.
 
@@ -32,6 +32,7 @@ async def get_user_by_email(db : AsyncSession, email : EmailStr):
         status_code=status.HTTP_404_NOT_FOUND,
         detail=f"Пользователь с email {email} не существует.",
     )
+
 
 async def create_user(db: AsyncSession, username: str, email: EmailStr, password: str):
     """
@@ -64,7 +65,6 @@ async def create_user(db: AsyncSession, username: str, email: EmailStr, password
             detail=f"Пользователь с email {email} уже существует.",
         )
 
-
     user = User(username=username, email=email, password=hash_password(password))
     db.add(user)
     await db.commit()
@@ -76,26 +76,26 @@ async def update_user_info(
     db: AsyncSession, user_id: int, new_username: str = None, new_email: EmailStr = None
 ):
     """
-        Обновление информации о пользователе.
+    Обновление информации о пользователе.
 
-        Эта функция обновляет имя и/или email пользователя по переданному user_id.
-        Если новый username или email уже заняты другим пользователем, генерируется ошибка 400.
-        Если пользователь не найден, генерируется ошибка 404.
+    Эта функция обновляет имя и/или email пользователя по переданному user_id.
+    Если новый username или email уже заняты другим пользователем, генерируется ошибка 400.
+    Если пользователь не найден, генерируется ошибка 404.
 
-        Args:
-            db (AsyncSession): Сессия базы данных.
-            user_id (int): ID пользователя, информацию о котором нужно обновить.
-            new_username (str, optional): Новый username пользователя.
-            new_email (EmailStr, optional): Новый email пользователя.
+    Args:
+        db (AsyncSession): Сессия базы данных.
+        user_id (int): ID пользователя, информацию о котором нужно обновить.
+        new_username (str, optional): Новый username пользователя.
+        new_email (EmailStr, optional): Новый email пользователя.
 
-        Returns:
-            User: Обновленный пользователь с новыми данными.
+    Returns:
+        User: Обновленный пользователь с новыми данными.
 
-        Raises:
-            HTTPException:
-                - Если пользователь с таким id не найден (статус 404).
-                - Если новый username/email уже занят (статус 400).
-        """
+    Raises:
+        HTTPException:
+            - Если пользователь с таким id не найден (статус 404).
+            - Если новый username/email уже занят (статус 400).
+    """
     result = await db.execute(select(User).filter(User.id == user_id))
     user = result.scalars().first()
 
@@ -133,20 +133,20 @@ async def update_user_info(
 
 async def get_user_info(db: AsyncSession, user_id: int):
     """
-       Получение информации о пользователе по его ID.
+    Получение информации о пользователе по его ID.
 
-       Функция ищет пользователя по его ID и возвращает его данные. Если пользователь не найден,
-       генерирует ошибку 404.
+    Функция ищет пользователя по его ID и возвращает его данные. Если пользователь не найден,
+    генерирует ошибку 404.
 
-       Args:
-           db (AsyncSession): Сессия базы данных.
-           user_id (int): ID пользователя, чьи данные нужно получить.
+    Args:
+        db (AsyncSession): Сессия базы данных.
+        user_id (int): ID пользователя, чьи данные нужно получить.
 
-       Returns:
-           User: Информация о пользователе.
+    Returns:
+        User: Информация о пользователе.
 
-       Raises:
-           HTTPException: Если пользователь с таким ID не найден (статус 404).
+    Raises:
+        HTTPException: Если пользователь с таким ID не найден (статус 404).
     """
     result = await db.execute(select(User).filter(User.id == user_id))
     user = result.scalars().first()
@@ -159,19 +159,19 @@ async def get_user_info(db: AsyncSession, user_id: int):
 
 async def delete_user(db: AsyncSession, user_id: int):
     """
-        Удаление пользователя из базы данных по его ID.
+    Удаление пользователя из базы данных по его ID.
 
-        Функция удаляет пользователя по его ID. Если пользователь не найден, генерируется ошибка 404.
+    Функция удаляет пользователя по его ID. Если пользователь не найден, генерируется ошибка 404.
 
-        Args:
-            db (AsyncSession): Сессия базы данных.
-            user_id (int): ID пользователя, которого нужно удалить.
+    Args:
+        db (AsyncSession): Сессия базы данных.
+        user_id (int): ID пользователя, которого нужно удалить.
 
-        Returns:
-            dict: Подтверждение успешного удаления пользователя.
+    Returns:
+        dict: Подтверждение успешного удаления пользователя.
 
-        Raises:
-            HTTPException: Если пользователь с таким ID не найден (статус 404).
+    Raises:
+        HTTPException: Если пользователь с таким ID не найден (статус 404).
     """
     result = await db.execute(select(User).filter(User.id == user_id))
     user = result.scalars().first()
