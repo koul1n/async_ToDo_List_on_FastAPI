@@ -51,7 +51,6 @@ def create_jwt(
     expiration_time = datetime.now(timezone.utc) + timedelta(
         minutes=auth_settings.expires_in
     )
-    data["sub"] = str(data["sub"])
     payload = {**data, "exp": expiration_time}
     return jwt.encode(payload, key, algorithm=algorithm)
 

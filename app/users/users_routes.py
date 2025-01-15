@@ -43,7 +43,7 @@ async def login_route(
     user = await get_user_by_email(db=db, email=form_data.username)
 
     if user and validate_password(pwd=form_data.password, hashed_pwd=user.password):
-        token = create_jwt({"sub": user.id, "username": user.username})
+        token = create_jwt({"sub": str(user.id), "username": user.username})
         return TokenInfo(access_token=token, token_type="Bearer")
 
     raise HTTPException(
