@@ -1,0 +1,36 @@
+services:
+  app:
+    build: .
+    container_name: myapp
+    depends_on:
+      - mydb
+    environment:
+      - DB_DRIVER=${DB_DRIVER}
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_PASS=${DB_PASS}
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_NAME=${DB_NAME}
+      - SERVER_HOST=${SERVER_HOST}
+      - SERVER_PORT=${SERVER_PORT}
+    ports:
+      - "8000:8000"
+    entrypoint: ["/bin/sh", "/app/docker-entrypoint.sh"]
+    networks:
+      - todolist_mynetwork
+
+  mydb:
+    image: postgres:13
+    container_name: mydb
+    environment:
+      - POSTGRES_USER=${DB_USERNAME}
+      - POSTGRES_PASSWORD=${DB_PASS}
+      - POSTGRES_DB=${DB_NAME}
+    ports:
+      - "5432:5432"
+    networks:
+      - todolist_mynetwork
+
+networks:
+  todolist_mynetwork:
+    driver: bridge
