@@ -1,17 +1,19 @@
 import pytest
 from fastapi import status
+from app.database import settings
 
-ENDPOINT = "http://127.0.0.1:8000/api/v1"
+
+ENDPOINT = f"http://{settings.SERVER_HOST}:{settings.SERVER_PORT}/api/v1"
 
 
 @pytest.mark.asyncio
 async def test_create_task(async_client, user_data, task_data):
-    # Сначала создаем пользователя
+
     create_user_response = await async_client.post(
         f"{ENDPOINT}/users/register/", json=user_data
     )
     assert create_user_response.status_code == status.HTTP_200_OK
-    # Логинимся
+
     response = await async_client.post(
         f"{ENDPOINT}/users/login/",
         data={"username": user_data["email"], "password": user_data["password"]},
@@ -29,12 +31,12 @@ async def test_create_task(async_client, user_data, task_data):
 
 @pytest.mark.asyncio
 async def test_get_task(async_client, user_data, task_data):
-    # Сначала создаем пользователя
+
     create_user_response = await async_client.post(
         f"{ENDPOINT}/users/register/", json=user_data
     )
     assert create_user_response.status_code == status.HTTP_200_OK
-    # Логинимся
+
     response = await async_client.post(
         f"{ENDPOINT}/users/login/",
         data={"username": user_data["email"], "password": user_data["password"]},
@@ -60,12 +62,12 @@ async def test_get_task(async_client, user_data, task_data):
 
 @pytest.mark.asyncio
 async def test_delete_all_tasks(async_client, user_data, task_data):
-    # Сначала создаем пользователя
+
     create_user_response = await async_client.post(
         f"{ENDPOINT}/users/register/", json=user_data
     )
     assert create_user_response.status_code == status.HTTP_200_OK
-    # Логинимся
+
     response = await async_client.post(
         f"{ENDPOINT}/users/login/",
         data={"username": user_data["email"], "password": user_data["password"]},
@@ -87,12 +89,12 @@ async def test_delete_all_tasks(async_client, user_data, task_data):
 
 @pytest.mark.asyncio
 async def test_delete_task(async_client, user_data, task_data):
-    # Сначала создаем пользователя
+
     create_user_response = await async_client.post(
         f"{ENDPOINT}/users/register/", json=user_data
     )
     assert create_user_response.status_code == status.HTTP_200_OK
-    # Логинимся
+
     response = await async_client.post(
         f"{ENDPOINT}/users/login/",
         data={"username": user_data["email"], "password": user_data["password"]},
@@ -115,12 +117,12 @@ async def test_delete_task(async_client, user_data, task_data):
 
 @pytest.mark.asyncio
 async def test_complete_task(async_client, user_data, task_data):
-    # Сначала создаем пользователя
+
     create_user_response = await async_client.post(
         f"{ENDPOINT}/users/register/", json=user_data
     )
     assert create_user_response.status_code == status.HTTP_200_OK
-    # Логинимся
+
     response = await async_client.post(
         f"{ENDPOINT}/users/login/",
         data={"username": user_data["email"], "password": user_data["password"]},

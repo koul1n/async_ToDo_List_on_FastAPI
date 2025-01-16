@@ -1,14 +1,14 @@
 services:
   app:
     build: .
-    container_name: myapp
+    container_name: todolist
     depends_on:
-      - mydb
+      - todo_db
     environment:
       - DB_DRIVER=${DB_DRIVER}
       - DB_USERNAME=${DB_USERNAME}
       - DB_PASS=${DB_PASS}
-      - DB_HOST=${DB_HOST}
+      - DB_HOST=todo_db
       - DB_PORT=${DB_PORT}
       - DB_NAME=${DB_NAME}
       - SERVER_HOST=${SERVER_HOST}
@@ -19,9 +19,9 @@ services:
     networks:
       - todolist_mynetwork
 
-  mydb:
+  todo_db:
     image: postgres:13
-    container_name: mydb
+    container_name: todo_db
     environment:
       - POSTGRES_USER=${DB_USERNAME}
       - POSTGRES_PASSWORD=${DB_PASS}

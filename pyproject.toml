@@ -55,3 +55,5 @@ known_third_party = [
     "typing_extensions",
     "uvicorn"
 ]
+[tool.pytest.ini_options]
+asyncio_default_fixture_loop_scope = "function"
