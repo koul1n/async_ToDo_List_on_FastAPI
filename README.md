@@ -20,6 +20,7 @@
 - Отметка задачи как выполненной.
 - Удаление всех задач пользователя.
 - Установка дедлайна для задач.
+- Обновление задач.
 
 ### Авторизация и аутентификация:
 - Использование **JWT токенов** для аутентификации пользователей.
@@ -68,58 +69,34 @@
 │   ├── pytest.ini
 │   ├── test_tasks.py
 │   └── test_users.py
+├── .dockerignore
 ├── .env
+├── .flake8
 ├── alembic.ini
+├── docker-compose.yml
+├── docker-entrypoint.sh
+├── Dockerfile
+├── pyproject.toml
 ├── requirements.txt
 ├── run.py
 └── README.md
 
    ```
 
-2. Установите зависимости:
+2. Запустите команду:
    ```bash
-   pip install -r requirements.txt
+   docker-compose up --build
    ```
 
-3. Настройте переменные окружения в файле `.env` следующим образом:
-   ```env
-   DB_DRIVER=postgresql+asyncpg
 
-   DB_USERNAME=<username>
-   DB_PASS=<password>
-   DB_HOST=<host>
-   DB_PORT=<port>
-   DB_NAME=<database>
-
-   DB_TEST_USERNAME=<test_username>
-   DB_TEST_PASS=<test_password>
-   DB_TEST_HOST=<test_host>
-   DB_TEST_PORT=<test_port>
-   DB_TEST_NAME=<test_database>
-
-   SERVER_HOST=127.0.0.1
-   SERVER_PORT=8000
-   TESTING=TESTING(заполняем если запускаем на тестовой бд, чтобы поменять зависимость на тестовую бд)
-   ```
-
-4. Проведите миграции:
-   ```bash
-   alembic upgrade head
-   ```
-
-5. Запустите приложение:
-   ```bash
-   uvicorn app.main:app --reload
-   ```
-
-6. Документация API доступна по адресу: [http://localhost:8000/docs](http://localhost:8000/docs).
+3. Документация API доступна по адресу: [http://localhost:8000/docs](http://localhost:8000/docs).
 
 ## Тестирование
 
 Для запуска тестов выполните:
 ```bash
-pytest
+docker exec -it todolist pytest
 ```
 
-Тесты выполняются на изолированной тестовой базе данных.
+
 
