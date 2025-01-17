@@ -71,7 +71,7 @@ async def create_user_route(
     Raises:
         HTTPException: В случае, если пользователь с таким email уже существует.
     """
-    new_user = await create_user(db, user.username, user.email, user.password)
+    new_user = await create_user(db = db, username=user.username, email=user.email, password=user.password)
     return new_user
 
 
@@ -112,7 +112,7 @@ async def update_user_route(
 @router.get("/me/", response_model=UserResponse)
 async def get_user_info_route(
     db: AsyncSession = Depends(database_helper.get_db),
-    current_user: dict = Depends(get_current_user),  # Добавляем проверку аутентификации
+    current_user: dict = Depends(get_current_user),
 ):
     """
     Получение информации о текущем пользователе.
@@ -132,14 +132,14 @@ async def get_user_info_route(
     """
     user_id = int(current_user["sub"])
 
-    user = await get_user_info(user_id=user_id, db=db)
+    user = await get_user_info(db = db, user_id=user_id)
     return user
 
 
 @router.delete("/me/delete/", response_model=dict)
 async def delete_user_route(
     db: AsyncSession = Depends(database_helper.get_db),
-    current_user: dict = Depends(get_current_user),  # Добавляем проверку аутентификации
+    current_user: dict = Depends(get_current_user),
 ):
     """
     Удаление текущего пользователя.

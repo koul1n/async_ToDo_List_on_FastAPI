@@ -16,6 +16,25 @@ from app.models import Task
 """
 
 
+async def get_task_by_id(*, db: AsyncSession, user_id: int, task_id: int):
+    """
+    Получает задачу пользователя по её ID.
+
+    Эта функция ищет задачу в базе данных по её ID и проверяет, принадлежит ли она указанному пользователю.
+
+    :param db: Объект сессии базы данных (AsyncSession).
+    :param user_id: Идентификатор пользователя, которому принадлежит задача.
+    :param task_id: Идентификатор задачи.
+    :return: Найденная задача.
+    """
+    result = await db.execute(
+        select(Task).filter(Task.id == task_id, Task.owner_id == user_id)
+    )
+    task = result.scalars().first()
+    if task:
+        return task
+    return None
+
 async def create_task(
     db: AsyncSession,
     user_id: int,
@@ -68,10 +87,8 @@ async def update_task(
     :raises HTTPException: В случае, если задача не найдена или не принадлежит пользователю.
     :return: Обновленная задача.
     """
-    result = await db.execute(
-        select(Task).filter(Task.id == task_id).filter(Task.owner_id == user_id)
-    )
-    task = result.scalars().first()
+
+    task = await get_task_by_id(db = db, task_id=task_id, user_id=user_id)
     if not task:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, detail="Задача не найдена"
@@ -117,11 +134,12 @@ async def complete_task(db: AsyncSession, user_id: int, task_id: int):
     :param task_id: Идентификатор задачи, которую необходимо завершить.
     :return: Обновленная задача с пометкой о выполнении.
     """
-    task = await db.get(Task, task_id)
-    if task and task.owner_id == user_id:
-        task.is_completed = True
-        await db.commit()
-        await db.refresh(task)
+    task = await get_task_by_id(db = db, task_id=task_id, user_id=user_id)
+    if not task:
+        raise ValueError("Задача не найдена")
+    task.is_completed = True
+    await db.commit()
+    await db.refresh(task)
     return task
 
 
@@ -136,10 +154,11 @@ async def delete_task(db: AsyncSession, user_id: int, task_id: int):
     :param task_id: Идентификатор задачи, которую нужно удалить.
     :return: Удаленная задача.
     """
-    task = await db.get(Task, task_id)
-    if task and task.owner_id == user_id:
-        await db.delete(task)
-        await db.commit()
+    task = await get_task_by_id(db = db, user_id=user_id, task_id=task_id)
+    if task is None:
+        raise ValueError("Задача не найдена.")
+    await db.delete(task)
+    await db.commit()
     return task
 
 

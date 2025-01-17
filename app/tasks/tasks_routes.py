@@ -141,7 +141,7 @@ async def update_task_route(
     return new_task
 
 
-@router.delete("/me/{task_id}/", response_model=TaskResponse)
+@router.delete("/me/{task_id}/")
 async def delete_task_route(
     task_id: int,
     db: AsyncSession = Depends(database_helper.get_db),
@@ -165,12 +165,9 @@ async def delete_task_route(
     """
     user_id = int(current_user["sub"])
 
-    task = await delete_task(db=db, task_id=task_id, user_id=user_id)
-    if task is None:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND, detail="Задача не найдена"
-        )
-    return task
+    await delete_task(db=db, task_id=task_id, user_id=user_id)
+
+    return {"message" : "Задача успешно удалена."}
 
 
 @router.delete("/me/", response_model=dict)

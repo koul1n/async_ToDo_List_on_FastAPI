@@ -8,6 +8,22 @@ from app.models import User
 from app.security import hash_password
 
 
+async def get_user(*, db : AsyncSession, email : EmailStr = None, user_id : int = None, username : str = None):
+    if email:
+        result = await db.execute(select(User).filter(User.email == email))
+        return result.scalars().first()
+    elif user_id:
+        result = await db.execute(select(User).filter(User.id == user_id))
+        return result.scalars().first()
+    elif username:
+        result = await db.execute(select(User).filter(User.username == username))
+        return result.scalars().first()
+
+    return None
+
+
+
+
 async def get_user_by_email(db: AsyncSession, email: EmailStr):
     """
     Получение пользователя из базы данных по его email.
@@ -25,9 +41,9 @@ async def get_user_by_email(db: AsyncSession, email: EmailStr):
     Raises:
         HTTPException: Если пользователь с таким email не найден (статус 404).
     """
-    result = await db.execute(select(User).filter(User.email == email))
-    if result:
-        return result.scalars().first()
+    user = await get_user(db = db, email = email)
+    if user:
+        return user
     raise HTTPException(
         status_code=status.HTTP_404_NOT_FOUND,
         detail=f"Пользователь с email {email} не существует.",
@@ -56,8 +72,8 @@ async def create_user(db: AsyncSession, username: str, email: EmailStr, password
             - Если пользователь с таким email уже существует (статус 400).
             - Если данные для создания пользователя неверны.
     """
-    result = await db.execute(select(User).filter(User.email == email))
-    existing_user = result.scalars().first()
+
+    existing_user = await get_user(db=db, email = email)
 
     if existing_user:
         raise HTTPException(
@@ -96,8 +112,8 @@ async def update_user_info(
             - Если пользователь с таким id не найден (статус 404).
             - Если новый username/email уже занят (статус 400).
     """
-    result = await db.execute(select(User).filter(User.id == user_id))
-    user = result.scalars().first()
+
+    user = await get_user(db = db, user_id=user_id)
 
     if not user:
         raise HTTPException(
@@ -105,10 +121,10 @@ async def update_user_info(
         )
 
     if new_username:
-        existing_user = await db.execute(
-            select(User).filter(User.username == new_username)
-        )
-        if existing_user.scalars().first():
+
+        existing_user = await get_user(db = db, username=new_username)
+
+        if existing_user:
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
                 detail=f"Пользователь с именем {new_username} уже существует.",
@@ -116,8 +132,8 @@ async def update_user_info(
         user.username = new_username
 
     if new_email:
-        existing_user = await db.execute(select(User).filter(User.email == new_email))
-        if existing_user.scalars().first():
+        existing_user = await get_user(db = db, email=new_email)
+        if existing_user:
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
                 detail=f"Пользователь с email {new_email} уже существует.",
@@ -148,8 +164,7 @@ async def get_user_info(db: AsyncSession, user_id: int):
     Raises:
         HTTPException: Если пользователь с таким ID не найден (статус 404).
     """
-    result = await db.execute(select(User).filter(User.id == user_id))
-    user = result.scalars().first()
+    user = await get_user(db = db, user_id=user_id)
     if not user:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, detail="Пользователь не найден."
@@ -173,8 +188,7 @@ async def delete_user(db: AsyncSession, user_id: int):
     Raises:
         HTTPException: Если пользователь с таким ID не найден (статус 404).
     """
-    result = await db.execute(select(User).filter(User.id == user_id))
-    user = result.scalars().first()
+    user = await get_user(db = db, user_id=user_id)
 
     if not user:
         raise HTTPException(
