@@ -19,12 +19,12 @@ async def test_create_user(async_client, user_data):
 
 @pytest.mark.asyncio
 async def test_login_user(async_client, user_data):
-    # Сначала создаем пользователя
+
     create_user_response = await async_client.post(
         f"{ENDPOINT}/users/register/", json=user_data
     )
     assert create_user_response.status_code == status.HTTP_200_OK
-    # Логинимся
+
     response = await async_client.post(
         f"{ENDPOINT}/users/login/",
         data={"username": user_data["email"], "password": user_data["password"]},
@@ -38,12 +38,12 @@ async def test_login_user(async_client, user_data):
 
 @pytest.mark.asyncio
 async def test_get_user(async_client, user_data):
-    # Сначала создаем пользователя
+
     create_user_response = await async_client.post(
         f"{ENDPOINT}/users/register/", json=user_data
     )
     assert create_user_response.status_code == status.HTTP_200_OK
-    # Логинимся
+
     response = await async_client.post(
         f"{ENDPOINT}/users/login/",
         data={"username": user_data["email"], "password": user_data["password"]},
@@ -59,12 +59,12 @@ async def test_get_user(async_client, user_data):
 
 @pytest.mark.asyncio
 async def test_delete_user(async_client, user_data):
-    # Сначала создаем пользователя
+
     create_user_response = await async_client.post(
         f"{ENDPOINT}/users/register/", json=user_data
     )
     assert create_user_response.status_code == status.HTTP_200_OK
-    # Логинимся
+
     response = await async_client.post(
         f"{ENDPOINT}/users/login/",
         data={"username": user_data["email"], "password": user_data["password"]},
@@ -82,12 +82,12 @@ async def test_delete_user(async_client, user_data):
 
 @pytest.mark.asyncio
 async def test_update_user(async_client, user_data):
-    # Сначала создаем пользователя
+
     create_user_response = await async_client.post(
         f"{ENDPOINT}/users/register/", json=user_data
     )
     assert create_user_response.status_code == status.HTTP_200_OK
-    # Логинимся
+
     response = await async_client.post(
         f"{ENDPOINT}/users/login/",
         data={"username": user_data["email"], "password": user_data["password"]},

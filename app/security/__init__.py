@@ -1,3 +1,4 @@
+'''Модуль для обработки аутентификации и авторизации пользователей с использованием FastAPI и JWT.'''
 from .auth import get_current_user
 from .config import auth_settings
 from .schemas import TokenInfo

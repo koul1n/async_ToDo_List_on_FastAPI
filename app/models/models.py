@@ -3,13 +3,6 @@ from datetime import datetime
 from sqlalchemy import ForeignKey, func
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 
-"""
-Модуль для определения моделей базы данных с использованием SQLAlchemy.
-
-Этот модуль содержит модели для пользователей и задач, которые используются
-для создания таблиц в базе данных. Каждая модель включает в себя поля, соответствующие
-данным, и устанавливает связи между моделями.
-"""
 
 
 class Base(DeclarativeBase):
