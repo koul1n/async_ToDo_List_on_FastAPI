@@ -94,14 +94,13 @@ async def create_user(db: AsyncSession, username: str, email: EmailStr, password
         HTTPException:
             - Если пользователь с таким email уже существует (статус 400).
             - Если данные для создания пользователя неверны.
+            - Если пользователь с таким именем уже существует (статус 400)
     """
-
-    existing_user = await get_user(db=db, email=email)
-
+    existing_user = await get_user(db=db, email=email, username=username)
     if existing_user:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail=f"Пользователь с email {email} уже существует.",
+            detail=f"Пользователь с email {email} или именем {username} уже существует.",
         )
 
     user = User(username=username, email=email, password=hash_password(password))
