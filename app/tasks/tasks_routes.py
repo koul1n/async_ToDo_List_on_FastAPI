@@ -79,7 +79,7 @@ async def get_tasks_route(
     return tasks
 
 
-@router.put("/me/{task_id}/complete/", response_model=TaskResponse)
+@router.put("/me/{task_id}/complete/", response_model=dict)
 async def complete_task_route(
     task_id: int,
     db: AsyncSession = Depends(database_helper.get_db),
@@ -103,12 +103,9 @@ async def complete_task_route(
     """
     user_id = int(current_user["sub"])
 
-    task = await complete_task(db=db, task_id=task_id, user_id=user_id)
-    if task is None:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND, detail="Задача не найдена"
-        )
-    return task
+    await complete_task(db=db, task_id=task_id, user_id=user_id)
+
+    return {"message" : "Задача выполнена =)"}
 
 
 @router.patch("/me/update/", response_model=TaskResponse)

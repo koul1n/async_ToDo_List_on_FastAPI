@@ -141,4 +141,4 @@ async def test_complete_task(async_client, user_data, task_data):
         f"{ENDPOINT}/tasks/me/{task_id}/complete/", headers=headers
     )
     assert task_complete_request.status_code == status.HTTP_200_OK
-    assert task_complete_request.json()["is_completed"] is True
+
