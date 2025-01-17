@@ -105,7 +105,7 @@ async def complete_task_route(
 
     await complete_task(db=db, task_id=task_id, user_id=user_id)
 
-    return {"message" : "Задача выполнена =)"}
+    return {"message": "Задача выполнена =)"}
 
 
 @router.patch("/me/update/", response_model=TaskResponse)
