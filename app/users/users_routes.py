@@ -71,7 +71,9 @@ async def create_user_route(
     Raises:
         HTTPException: В случае, если пользователь с таким email уже существует.
     """
-    new_user = await create_user(db = db, username=user.username, email=user.email, password=user.password)
+    new_user = await create_user(
+        db=db, username=user.username, email=user.email, password=user.password
+    )
     return new_user
 
 
@@ -132,7 +134,7 @@ async def get_user_info_route(
     """
     user_id = int(current_user["sub"])
 
-    user = await get_user_info(db = db, user_id=user_id)
+    user = await get_user_info(db=db, user_id=user_id)
     return user
 
 

@@ -1,7 +1,7 @@
 import pytest
 from fastapi import status
-from app.database import settings
 
+from app.database import settings
 
 ENDPOINT = f"http://{settings.SERVER_HOST}:{settings.SERVER_PORT}/api/v1"
 

@@ -4,7 +4,6 @@ from sqlalchemy import ForeignKey, func
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 
 
-
 class Base(DeclarativeBase):
     """
     Базовый класс для всех моделей, который наследует от `DeclarativeBase`.

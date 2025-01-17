@@ -167,7 +167,7 @@ async def delete_task_route(
 
     await delete_task(db=db, task_id=task_id, user_id=user_id)
 
-    return {"message" : "Задача успешно удалена."}
+    return {"message": "Задача успешно удалена."}
 
 
 @router.delete("/me/", response_model=dict)

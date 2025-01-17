@@ -8,25 +8,31 @@ from app.models import User
 from app.security import hash_password
 
 
-async def get_user(*, db : AsyncSession, email : EmailStr = None, user_id : int = None, username : str = None):
+async def get_user(
+    *,
+    db: AsyncSession,
+    email: EmailStr = None,
+    user_id: int = None,
+    username: str = None,
+):
     """
-       Получение пользователя из базы данных.
+    Получение пользователя из базы данных.
 
-       Эта функция позволяет получить пользователя по одному из переданных параметров:
-       email, user_id или username. Если ни один параметр не указан, возвращается None.
+    Эта функция позволяет получить пользователя по одному из переданных параметров:
+    email, user_id или username. Если ни один параметр не указан, возвращается None.
 
-       Параметры:
-       - db (AsyncSession): Асинхронная сессия базы данных.
-       - email (EmailStr, optional): Email пользователя. Если указан, поиск производится по email.
-       - user_id (int, optional): Идентификатор пользователя. Если указан, поиск производится по user_id.
-       - username (str, optional): Имя пользователя. Если указано, поиск производится по username.
+    Параметры:
+    - db (AsyncSession): Асинхронная сессия базы данных.
+    - email (EmailStr, optional): Email пользователя. Если указан, поиск производится по email.
+    - user_id (int, optional): Идентификатор пользователя. Если указан, поиск производится по user_id.
+    - username (str, optional): Имя пользователя. Если указано, поиск производится по username.
 
-       Возвращает:
-       - User: Найденный пользователь или None, если пользователь не найден или параметры не указаны.
+    Возвращает:
+    - User: Найденный пользователь или None, если пользователь не найден или параметры не указаны.
 
-       Примечание:
-       - Если указано несколько параметров (email, user_id, username), используется только первый из них.
-       - При отсутствии всех параметров возвращается None.
+    Примечание:
+    - Если указано несколько параметров (email, user_id, username), используется только первый из них.
+    - При отсутствии всех параметров возвращается None.
     """
     if email:
         result = await db.execute(select(User).filter(User.email == email))
@@ -39,8 +45,6 @@ async def get_user(*, db : AsyncSession, email : EmailStr = None, user_id : int 
         return result.scalars().first()
 
     return None
-
-
 
 
 async def get_user_by_email(db: AsyncSession, email: EmailStr):
@@ -60,7 +64,7 @@ async def get_user_by_email(db: AsyncSession, email: EmailStr):
     Raises:
         HTTPException: Если пользователь с таким email не найден (статус 404).
     """
-    user = await get_user(db = db, email = email)
+    user = await get_user(db=db, email=email)
     if user:
         return user
     raise HTTPException(
@@ -92,7 +96,7 @@ async def create_user(db: AsyncSession, username: str, email: EmailStr, password
             - Если данные для создания пользователя неверны.
     """
 
-    existing_user = await get_user(db=db, email = email)
+    existing_user = await get_user(db=db, email=email)
 
     if existing_user:
         raise HTTPException(
@@ -132,7 +136,7 @@ async def update_user_info(
             - Если новый username/email уже занят (статус 400).
     """
 
-    user = await get_user(db = db, user_id=user_id)
+    user = await get_user(db=db, user_id=user_id)
 
     if not user:
         raise HTTPException(
@@ -141,7 +145,7 @@ async def update_user_info(
 
     if new_username:
 
-        existing_user = await get_user(db = db, username=new_username)
+        existing_user = await get_user(db=db, username=new_username)
 
         if existing_user:
             raise HTTPException(
@@ -151,7 +155,7 @@ async def update_user_info(
         user.username = new_username
 
     if new_email:
-        existing_user = await get_user(db = db, email=new_email)
+        existing_user = await get_user(db=db, email=new_email)
         if existing_user:
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
@@ -183,7 +187,7 @@ async def get_user_info(db: AsyncSession, user_id: int):
     Raises:
         HTTPException: Если пользователь с таким ID не найден (статус 404).
     """
-    user = await get_user(db = db, user_id=user_id)
+    user = await get_user(db=db, user_id=user_id)
     if not user:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, detail="Пользователь не найден."
@@ -207,7 +211,7 @@ async def delete_user(db: AsyncSession, user_id: int):
     Raises:
         HTTPException: Если пользователь с таким ID не найден (статус 404).
     """
-    user = await get_user(db = db, user_id=user_id)
+    user = await get_user(db=db, user_id=user_id)
 
     if not user:
         raise HTTPException(
