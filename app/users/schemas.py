@@ -58,6 +58,6 @@ class UserUpdate(BaseModel):
 
     """
 
-    username: str | None
+    username: constr(min_length=3, max_length=20) | None
     email: EmailStr | None
     model_config = ConfigDict(from_attributes=True)

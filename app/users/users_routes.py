@@ -81,7 +81,7 @@ async def create_user_route(
 async def update_user_route(
     user_update: UserUpdate,
     db: AsyncSession = Depends(database_helper.get_db),
-    current_user: dict = Depends(get_current_user),  # Добавляем проверку аутентификации
+    current_user: dict = Depends(get_current_user),
 ):
     """
     Обновление информации о текущем пользователе.
