@@ -46,3 +46,22 @@ async def get_user(
     raise HTTPException(
         status_code=status.HTTP_404_NOT_FOUND, detail="Пользователь не найден."
     )
+
+async def change_username(*, db : AsyncSession, user : User, new_username : str):
+    existing_user = await get_user(db=db, username=new_username)
+
+    if existing_user:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Пользователь с именем {new_username} уже существует.",
+        )
+    user.username = new_username
+
+async def change_email(*, db : AsyncSession, user : User, new_email : EmailStr):
+    existing_user = await get_user(db=db, email=new_email)
+    if existing_user:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Пользователь с email {new_email} уже существует.",
+        )
+    user.email = new_email

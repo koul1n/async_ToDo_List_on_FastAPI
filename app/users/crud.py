@@ -2,7 +2,7 @@ from fastapi import HTTPException, status
 from pydantic import EmailStr
 from sqlalchemy import delete
 from sqlalchemy.ext.asyncio import AsyncSession
-from app.services import get_user
+from app.services import get_user, change_username, change_email
 from app.models import User
 from app.security import hash_password
 
@@ -72,30 +72,11 @@ async def update_user_info(
 
     user = await get_user(db=db, user_id=user_id)
 
-    if not user:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND, detail="Пользователь не найден."
-        )
-
     if new_username:
-
-        existing_user = await get_user(db=db, username=new_username)
-
-        if existing_user:
-            raise HTTPException(
-                status_code=status.HTTP_400_BAD_REQUEST,
-                detail=f"Пользователь с именем {new_username} уже существует.",
-            )
-        user.username = new_username
-
+        await change_username(db = db, user=user, new_username=new_username
+                              )
     if new_email:
-        existing_user = await get_user(db=db, email=new_email)
-        if existing_user:
-            raise HTTPException(
-                status_code=status.HTTP_400_BAD_REQUEST,
-                detail=f"Пользователь с email {new_email} уже существует.",
-            )
-        user.email = new_email
+        await change_email(db = db, user= user, new_email=new_email)
 
     db.add(user)
     await db.commit()
