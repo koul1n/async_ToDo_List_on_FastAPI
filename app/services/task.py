@@ -4,12 +4,6 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 from app.models import Task
 
-"""
-Модуль для управления задачами пользователя в базе данных с использованием SQLAlchemy и FastAPI.
-
-Этот модуль включает функции для создания, обновления, получения, завершения и удаления задач. 
-Каждая операция выполняется асинхронно с использованием SQLAlchemy для взаимодействия с базой данных.
-"""
 
 
 async def get_task_by_id(*, db: AsyncSession, user_id: int, task_id: int):
