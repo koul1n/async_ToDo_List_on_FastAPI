@@ -47,32 +47,6 @@ async def get_user(
     return None
 
 
-async def get_user_by_email(db: AsyncSession, email: EmailStr):
-    """
-    Получение пользователя из базы данных по его email.
-
-    Функция ищет пользователя в базе данных по переданному email. Если пользователь с таким
-    email найден, возвращает его данные. В противном случае генерирует ошибку 404.
-
-    Args:
-        db (AsyncSession): Сессия базы данных.
-        email (EmailStr): Электронная почта пользователя.
-
-    Returns:
-        User: Пользователь, найденный по email.
-
-    Raises:
-        HTTPException: Если пользователь с таким email не найден (статус 404).
-    """
-    user = await get_user(db=db, email=email)
-    if user:
-        return user
-    raise HTTPException(
-        status_code=status.HTTP_404_NOT_FOUND,
-        detail=f"Пользователь с email {email} не существует.",
-    )
-
-
 async def create_user(db: AsyncSession, username: str, email: EmailStr, password: str):
     """
     Создание нового пользователя в базе данных.

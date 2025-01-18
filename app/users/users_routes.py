@@ -10,7 +10,7 @@ from app.users import (
     UserUpdate,
     create_user,
     delete_user,
-    get_user_by_email,
+    get_user,
     get_user_info,
     update_user_info,
 )
@@ -40,7 +40,7 @@ async def login_route(
     Returns:
         TokenInfo: JWT токен для аутентификации пользователя.
     """
-    user = await get_user_by_email(db=db, email=form_data.username)
+    user = await get_user(db=db, email=form_data.username)
 
     if user and validate_password(pwd=form_data.password, hashed_pwd=user.password):
         token = create_jwt({"sub": str(user.id), "username": user.username})
