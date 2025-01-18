@@ -33,7 +33,10 @@ async def get_task_by_id(*, db: AsyncSession, user_id: int, task_id: int):
     task = result.scalars().first()
     if task:
         return task
-    return None
+    raise HTTPException(
+        status_code=status.HTTP_404_NOT_FOUND,
+        detail="Задача не найдена или не принадлежит пользователю."
+    )
 
 
 async def create_task(
@@ -90,10 +93,6 @@ async def update_task(
     """
 
     task = await get_task_by_id(db=db, task_id=task_id, user_id=user_id)
-    if not task:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND, detail="Задача не найдена"
-        )
 
     if title:
         task.title = title
@@ -136,8 +135,6 @@ async def complete_task(db: AsyncSession, user_id: int, task_id: int):
     :return: Обновленная задача с пометкой о выполнении.
     """
     task = await get_task_by_id(db=db, task_id=task_id, user_id=user_id)
-    if not task:
-        raise ValueError("Задача не найдена")
     task.is_completed = True
     await db.commit()
     await db.refresh(task)
@@ -156,8 +153,6 @@ async def delete_task(db: AsyncSession, user_id: int, task_id: int):
     :return: Удаленная задача.
     """
     task = await get_task_by_id(db=db, user_id=user_id, task_id=task_id)
-    if task is None:
-        raise ValueError("Задача не найдена.")
     await db.delete(task)
     await db.commit()
     return task
