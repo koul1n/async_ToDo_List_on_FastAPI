@@ -1,34 +1,39 @@
 """
-Этот модуль содержит основное приложение FastAPI и настраивает маршруты, а также зависимости.
-
-Основные функции модуля:
-1. Создает экземпляр приложения FastAPI.
-2. Настраивает маршруты для управления задачами (`tasks_routes`) и пользователями (`users_routes`).
-3. Переопределяет зависимость получения базы данных для тестирования, если установлена переменная окружения `TESTING`.
-
-Функциональность:
-- Если переменная окружения `TESTING` установлена, приложение использует тестовую базу данных, подключив зависимость `database_for_test.get_db` вместо стандартной `database_helper.get_db`.
-- Маршруты:
-  - `tasks`: Маршруты для работы с задачами.
-  - `users`: Маршруты для управления пользователями.
-
-Переменные:
-- `app`: Экземпляр FastAPI.
+Этот файл содержит конфигурацию приложения FastAPI, включая настройку middleware для логирования,
+а также настройку жизненного цикла приложения.
 """
 
 import os
-
 from fastapi import FastAPI
-
+from app.logs import log_middleware, logger
 from app.database import database_for_test, database_helper
 from app.tasks.tasks_routes import router as task_router
 from app.users.users_routes import router as user_router
+from uuid import uuid4
+from contextlib import asynccontextmanager
 
-app = FastAPI()
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    database_helper.log_id = str(uuid4())
+    try:
+        if os.getenv("TESTING", None):
+            app.dependency_overrides[database_helper.get_db] = database_for_test.get_db
+            await database_for_test.test_connection()
+        else:
+            await database_helper.test_connection()
+        yield
+    except Exception as e:
+        logger.bind(log_id=database_helper.log_id).error(
+            f"Lifespan startup failed: {str(e)}"
+        )
+        raise e
 
 
-if os.getenv("TESTING", None):  # Проверяем переменную окружения
-    app.dependency_overrides[database_helper.get_db] = database_for_test.get_db
+app = FastAPI(lifespan=lifespan)
+
+app.middleware("http")(log_middleware)
+
 
 app.include_router(task_router, tags=["tasks"])
 app.include_router(user_router, tags=["users"])
