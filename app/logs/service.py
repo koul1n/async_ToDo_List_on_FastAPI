@@ -17,6 +17,7 @@ from fastapi import Request, status
 from fastapi.responses import JSONResponse
 from loguru import logger
 from uuid import uuid4
+from typing import Callable
 
 logger.remove()
 logger.add(
@@ -29,7 +30,7 @@ logger.add(
 )
 
 
-async def log_middleware(request: Request, call_next):
+async def log_middleware(request: Request, call_next : Callable):
     """
     Middleware для логирования запросов и ответов.
 
