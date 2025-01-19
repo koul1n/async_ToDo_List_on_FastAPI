@@ -141,10 +141,14 @@ async def test_complete_task(async_client, user_data, task_data):
     )
     assert task_request.status_code == status.HTTP_200_OK
     task_id = task_request.json()["id"]
-    task_complete_request = await async_client.put(
-        f"{ENDPOINT}/tasks/me/{task_id}/complete/", headers=headers
+    change_status_task_json = {
+        'id' : task_id,
+        'new_status' : 'in_progress'
+    }
+    task_change_status_request = await async_client.put(
+        f"{ENDPOINT}/tasks/me/{task_id}/status/", headers=headers, json=change_status_task_json
     )
-    assert task_complete_request.status_code == status.HTTP_200_OK
+    assert task_change_status_request.status_code == status.HTTP_200_OK
 
 
 @pytest.mark.asyncio
