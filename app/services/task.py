@@ -27,5 +27,3 @@ async def get_task_by_id(*, db: AsyncSession, user_id: int, task_id: int):
         status_code=status.HTTP_404_NOT_FOUND,
         detail="Задача не найдена или не принадлежит пользователю.",
     )
-
-

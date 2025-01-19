@@ -16,20 +16,20 @@ class Base(DeclarativeBase):
 
 class Task(Base):
     """
-        Модель задачи.
+    Модель задачи.
 
-        Атрибуты:
-            id (int): Уникальный идентификатор задачи.
-            title (str): Заголовок задачи. Поле не может быть пустым.
-            description (str): Описание задачи.
-            status (TaskStatus): Статус задачи. Может быть одним из значений перечисления `TaskStatus`.
-            created_at (datetime): Дата и время создания задачи. Устанавливается автоматически при создании задачи.
-            deadline (datetime | None): Дата и время дедлайна задачи. Может быть пустым.
-            owner_id (int): Идентификатор пользователя, которому принадлежит задача. Внешний ключ на модель `User`.
-            owner (User): Связь с пользователем, который является владельцем задачи.
+    Атрибуты:
+        id (int): Уникальный идентификатор задачи.
+        title (str): Заголовок задачи. Поле не может быть пустым.
+        description (str): Описание задачи.
+        status (TaskStatus): Статус задачи. Может быть одним из значений перечисления `TaskStatus`.
+        created_at (datetime): Дата и время создания задачи. Устанавливается автоматически при создании задачи.
+        deadline (datetime | None): Дата и время дедлайна задачи. Может быть пустым.
+        owner_id (int): Идентификатор пользователя, которому принадлежит задача. Внешний ключ на модель `User`.
+        owner (User): Связь с пользователем, который является владельцем задачи.
 
-        Связи:
-            owner (User): Связь с пользователем, который является владельцем задачи. Один пользователь может иметь несколько задач.
+    Связи:
+        owner (User): Связь с пользователем, который является владельцем задачи. Один пользователь может иметь несколько задач.
     """
 
     __tablename__ = "tasks"
@@ -37,7 +37,9 @@ class Task(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     title: Mapped[str] = mapped_column(nullable=False)
     description: Mapped[str] = mapped_column()
-    status: Mapped[TaskStatus] = mapped_column(Enum(TaskStatus), default=TaskStatus.NEW, nullable=False)
+    status: Mapped[TaskStatus] = mapped_column(
+        Enum(TaskStatus), default=TaskStatus.NEW, nullable=False
+    )
     created_at: Mapped[datetime] = mapped_column(default=func.now(), nullable=False)
     deadline: Mapped[datetime | None] = mapped_column(nullable=True)
 

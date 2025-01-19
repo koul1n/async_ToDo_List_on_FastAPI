@@ -15,6 +15,7 @@
 Переменные:
 - `app`: Экземпляр FastAPI.
 """
+
 import os
 
 from fastapi import FastAPI

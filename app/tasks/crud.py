@@ -13,7 +13,6 @@ from app.models import Task
 """
 
 
-
 async def create_task(
     db: AsyncSession,
     user_id: int,
@@ -98,7 +97,9 @@ async def get_tasks(db: AsyncSession, user_id: int):
     return result.scalars().all()
 
 
-async def update_task_status(db: AsyncSession, user_id: int, task_id: int, new_status: str):
+async def update_task_status(
+    db: AsyncSession, user_id: int, task_id: int, new_status: str
+):
     """
     Обновляет статус задачи.
 
@@ -118,7 +119,6 @@ async def update_task_status(db: AsyncSession, user_id: int, task_id: int, new_s
     return task
 
 
-
 async def delete_task(db: AsyncSession, user_id: int, task_id: int):
     """
     Удаляет задачу пользователя по ID.
@@ -136,7 +136,6 @@ async def delete_task(db: AsyncSession, user_id: int, task_id: int):
     return task
 
 
-# Удаление всех задач пользователя
 async def delete_all_tasks(db: AsyncSession, user_id: int):
     """
     Удаляет все задачи пользователя.

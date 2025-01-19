@@ -7,7 +7,6 @@ from app.models import User
 from app.security import hash_password
 
 
-
 async def create_user(db: AsyncSession, username: str, email: EmailStr, password: str):
     """
     Создание нового пользователя в базе данных.
@@ -73,10 +72,9 @@ async def update_user_info(
     user = await get_user(db=db, user_id=user_id)
 
     if new_username:
-        await change_username(db = db, user=user, new_username=new_username
-                              )
+        await change_username(db=db, user=user, new_username=new_username)
     if new_email:
-        await change_email(db = db, user= user, new_email=new_email)
+        await change_email(db=db, user=user, new_email=new_email)
 
     db.add(user)
     await db.commit()

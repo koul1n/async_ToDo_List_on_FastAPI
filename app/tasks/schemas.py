@@ -7,15 +7,15 @@ class TaskStatus(str, Enum):
     """
     Перечисление статусов задачи.
     """
+
     NEW = "new"
     IN_PROGRESS = "in_progress"
     COMPLETED = "completed"
 
 
 class TaskUpdateStatus(BaseModel):
-    id : int
+    id: int
     new_status: TaskStatus
-
 
 
 class TaskBase(BaseModel):
