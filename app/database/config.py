@@ -54,6 +54,8 @@ class Settings(BaseSettings):
 
     SERVER_PORT: int = os.getenv("SERVER_PORT")
 
+    EXIT_CODE_ERROR: int = 1
+
     def dsn(self):
         return f"{self.DRIVER}://{self.USERNAME}:{self.PASS}@{self.HOST}:{self.PORT}/{self.NAME}"
 

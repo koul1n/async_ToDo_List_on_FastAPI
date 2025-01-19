@@ -9,6 +9,8 @@ from app.logs import logger
 from app import app
 from app.database import settings
 import sys
+from uuid import uuid4
+
 
 if __name__ == "__main__":
     """
@@ -19,5 +21,5 @@ if __name__ == "__main__":
     try:
         uvicorn.run(app, host=settings.SERVER_HOST, port=settings.SERVER_PORT)
     except Exception as ex:
-        logger.error(f"Error starting the server: {ex}")
-        sys.exit(1)
+        logger.bind(log_id = str(uuid4())).error(f"Error starting the server: {ex}")
+        sys.exit(settings.EXIT_CODE_ERROR)
