@@ -31,8 +31,8 @@
 
 1. Клонируйте репозиторий и перейдите в папку с проектом:
    ```bash
-   git clone <URL repository>
-   cd <папка с проектом>
+   git clone https://github.com/koul1n/async_ToDo_List_on_FastAPI.git
+   cd async_ToDo_List_on_FastAPI
    ```
 
    ## Структура проекта:
@@ -53,6 +53,10 @@
 │   │   ├── config.py
 │   │   ├── schemas.py
 │   │   └── utils.py
+│   ├── logs
+│   │   ├── __init__.py
+│   │   ├── service.py
+│   │   
 │   ├── tasks
 │   │   ├── __init__.py
 │   │   ├── crud.py
