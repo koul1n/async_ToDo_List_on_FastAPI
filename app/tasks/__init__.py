@@ -11,12 +11,12 @@
 """
 
 from .crud import (
-    complete_task,
+    update_task_status,
     create_task,
     delete_all_tasks,
     delete_task,
     get_tasks,
     update_task,
 )
-from .schemas import TaskBase, TaskResponse, TaskUpdate
+from .schemas import TaskBase, TaskResponse, TaskUpdate, TaskUpdateStatus
 from .tasks_routes import router

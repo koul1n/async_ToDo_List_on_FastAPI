@@ -98,22 +98,25 @@ async def get_tasks(db: AsyncSession, user_id: int):
     return result.scalars().all()
 
 
-async def complete_task(db: AsyncSession, user_id: int, task_id: int):
+async def update_task_status(db: AsyncSession, user_id: int, task_id: int, new_status: str):
     """
-    Отмечает задачу как выполненную.
+    Обновляет статус задачи.
 
-    Эта функция изменяет статус задачи на "выполнено", если задача принадлежит указанному пользователю.
+    Эта функция изменяет статус задачи на указанный, если задача принадлежит указанному пользователю.
 
     :param db: Объект сессии базы данных (AsyncSession).
     :param user_id: Идентификатор пользователя, которому принадлежит задача.
-    :param task_id: Идентификатор задачи, которую необходимо завершить.
-    :return: Обновленная задача с пометкой о выполнении.
+    :param task_id: Идентификатор задачи, статус которой необходимо обновить.
+    :param new_status: Новый статус задачи (строка, одно из значений TaskStatus).
+    :return: Обновленная задача с новым статусом.
     """
     task = await get_task_by_id(db=db, task_id=task_id, user_id=user_id)
-    task.is_completed = True
+
+    task.status = new_status
     await db.commit()
     await db.refresh(task)
     return task
+
 
 
 async def delete_task(db: AsyncSession, user_id: int, task_id: int):

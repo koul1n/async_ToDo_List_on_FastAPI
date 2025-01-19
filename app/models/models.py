@@ -1,6 +1,6 @@
 from datetime import datetime
-
-from sqlalchemy import ForeignKey, func
+from app.tasks.schemas import TaskStatus
+from sqlalchemy import ForeignKey, func, Enum
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 
 
@@ -37,7 +37,7 @@ class Task(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     title: Mapped[str] = mapped_column(nullable=False)
     description: Mapped[str] = mapped_column()
-    is_completed: Mapped[bool] = mapped_column(default=False)
+    status: Mapped[TaskStatus] = mapped_column(Enum(TaskStatus), default=TaskStatus.NEW, nullable=False)
     created_at: Mapped[datetime] = mapped_column(default=func.now(), nullable=False)
     deadline: Mapped[datetime | None] = mapped_column(nullable=True)
 

@@ -3,7 +3,7 @@ from fastapi import HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 from app.models import Task
-
+from enum import Enum
 
 
 async def get_task_by_id(*, db: AsyncSession, user_id: int, task_id: int):
@@ -27,3 +27,5 @@ async def get_task_by_id(*, db: AsyncSession, user_id: int, task_id: int):
         status_code=status.HTTP_404_NOT_FOUND,
         detail="Задача не найдена или не принадлежит пользователю.",
     )
+
+

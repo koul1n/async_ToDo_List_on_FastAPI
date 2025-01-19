@@ -7,12 +7,12 @@ from app.tasks import (
     TaskBase,
     TaskResponse,
     TaskUpdate,
-    complete_task,
+    update_task_status,
     create_task,
     delete_all_tasks,
     delete_task,
     get_tasks,
-    update_task,
+    update_task, TaskUpdateStatus
 )
 
 """
@@ -79,9 +79,9 @@ async def get_tasks_route(
     return tasks
 
 
-@router.put("/me/{task_id}/complete/", response_model=dict)
-async def complete_task_route(
-    task_id: int,
+@router.put("/me/{task_id}/status/", response_model=dict)
+async def change_status_task_route(
+    task : TaskUpdateStatus,
     db: AsyncSession = Depends(database_helper.get_db),
     current_user: dict = Depends(get_current_user),
 ):
@@ -103,9 +103,9 @@ async def complete_task_route(
     """
     user_id = int(current_user["sub"])
 
-    await complete_task(db=db, task_id=task_id, user_id=user_id)
+    await update_task_status(db=db, task_id=task.id, user_id=user_id, new_status=task.new_status)
 
-    return {"message": "Задача выполнена =)"}
+    return {"message": f"Статус задачи изменен."}
 
 
 @router.patch("/me/update/", response_model=TaskResponse)
