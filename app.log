@@ -277,3 +277,195 @@
 2025-01-19 17:49:36.398 | INFO | dd9fd3d9-e251-4c18-865d-e85544355019 | Successfully accessed /api/v1/users/login/ with status 200
 2025-01-19 17:49:36.401 | INFO | 257bcf51-ac38-46f4-8aa8-f2049be181ab | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
 2025-01-19 17:49:36.411 | INFO | 7e6e99ac-1eb1-439b-a4da-1a3e16f77a2d | Successfully accessed /api/v1/users/me/update/ with status 200
+2025-01-19 17:50:06.160 | INFO | 707d79b7-854e-42a6-ac01-d0e8e526002f | Successfully accessed /redoc with status 200
+2025-01-19 17:50:06.345 | INFO | 053d4b8a-cb9e-453b-85cf-7c1db2a3a621 | Successfully accessed /openapi.json with status 200
+2025-01-19 20:04:18.540 | INFO | 548a6f19-6007-40c5-b7e4-3bfea7b94b90 | Database engine initialized.
+2025-01-19 20:04:18.541 | INFO | bbc5451d-af03-4da8-97c7-3fbced0aff1f | Database engine initialized.
+2025-01-19 20:04:18.738 | INFO | a6a020b9-3069-4dbf-89a2-97253ae3e54c | Database connection test successful.
+2025-01-19 20:04:24.480 | INFO | 5fe826d7-405f-4a4c-af20-dd94c92943ff | Database engine initialized.
+2025-01-19 20:04:24.480 | INFO | e0a593b6-c9af-4043-8d25-512ab19077c3 | Database engine initialized.
+2025-01-19 20:04:24.645 | INFO | a6a020b9-3069-4dbf-89a2-97253ae3e54c | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:04:25.062 | INFO | 22b2b0e2-4406-46c5-a48b-0415e31ebfca | Successfully accessed /api/v1/users/register/ with status 200
+2025-01-19 20:04:25.066 | INFO | a6a020b9-3069-4dbf-89a2-97253ae3e54c | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:04:25.448 | INFO | b953ae35-7b3f-4af4-a170-811fb6efa6a4 | Successfully accessed /api/v1/users/login/ with status 200
+2025-01-19 20:04:25.450 | INFO | a6a020b9-3069-4dbf-89a2-97253ae3e54c | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:04:25.484 | INFO | f414cffa-181a-4439-b924-26c461495116 | Successfully accessed /api/v1/tasks/me/ with status 200
+2025-01-19 20:04:25.512 | INFO | a6a020b9-3069-4dbf-89a2-97253ae3e54c | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:04:25.896 | INFO | ea3d5e5d-0fc2-4f71-9dbd-e3e7b6a2ed28 | Successfully accessed /api/v1/users/register/ with status 200
+2025-01-19 20:04:25.899 | INFO | a6a020b9-3069-4dbf-89a2-97253ae3e54c | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:04:26.280 | INFO | b6546de6-9db0-471f-a704-460edc5c0dc8 | Successfully accessed /api/v1/users/login/ with status 200
+2025-01-19 20:04:26.282 | INFO | a6a020b9-3069-4dbf-89a2-97253ae3e54c | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:04:26.286 | INFO | 1984c7f7-5220-4aa8-9341-d43c0ae82379 | Successfully accessed /api/v1/tasks/me/ with status 200
+2025-01-19 20:04:26.287 | INFO | a6a020b9-3069-4dbf-89a2-97253ae3e54c | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:04:26.290 | INFO | 5a6ee001-4af8-484e-ad19-fa81142bc1b0 | Successfully accessed /api/v1/tasks/me/ with status 200
+2025-01-19 20:04:26.319 | INFO | a6a020b9-3069-4dbf-89a2-97253ae3e54c | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:04:26.704 | INFO | fd3fdd15-f370-4548-9c15-d511d9b4ea36 | Successfully accessed /api/v1/users/register/ with status 200
+2025-01-19 20:04:26.706 | INFO | a6a020b9-3069-4dbf-89a2-97253ae3e54c | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:04:27.088 | INFO | 192697a9-2736-4da1-8b8f-6a768d2b7bc6 | Successfully accessed /api/v1/users/login/ with status 200
+2025-01-19 20:04:27.090 | INFO | a6a020b9-3069-4dbf-89a2-97253ae3e54c | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:04:27.094 | INFO | 1bbb5b95-b822-448a-92ab-af019e46db51 | Successfully accessed /api/v1/tasks/me/ with status 200
+2025-01-19 20:04:27.095 | INFO | a6a020b9-3069-4dbf-89a2-97253ae3e54c | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:04:27.100 | INFO | 1ed1cb66-221d-4ab5-aa6b-c6e35249de42 | Successfully accessed /api/v1/tasks/me/ with status 200
+2025-01-19 20:04:27.127 | INFO | a6a020b9-3069-4dbf-89a2-97253ae3e54c | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:04:27.511 | INFO | 2a8a9caa-2b73-4849-b633-17cbd89e003f | Successfully accessed /api/v1/users/register/ with status 200
+2025-01-19 20:04:27.513 | INFO | a6a020b9-3069-4dbf-89a2-97253ae3e54c | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:04:27.895 | INFO | 2476a8b9-0e81-4440-9dd7-1d0d44d0ab83 | Successfully accessed /api/v1/users/login/ with status 200
+2025-01-19 20:04:27.897 | INFO | a6a020b9-3069-4dbf-89a2-97253ae3e54c | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:04:27.901 | INFO | e376928f-6493-4abb-9c62-4fc878e8e095 | Successfully accessed /api/v1/tasks/me/ with status 200
+2025-01-19 20:04:27.902 | INFO | a6a020b9-3069-4dbf-89a2-97253ae3e54c | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:04:27.906 | INFO | 7172d14a-6ef0-411a-b49d-1c458c4d1c88 | Successfully accessed /api/v1/tasks/me/54/ with status 200
+2025-01-19 20:04:27.934 | INFO | a6a020b9-3069-4dbf-89a2-97253ae3e54c | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:04:28.318 | INFO | a58c52b6-ebca-462a-b664-94a7d215bc3b | Successfully accessed /api/v1/users/register/ with status 200
+2025-01-19 20:04:28.320 | INFO | a6a020b9-3069-4dbf-89a2-97253ae3e54c | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:04:28.702 | INFO | f9c902c0-5416-4fba-ba00-bcf6f69f3d48 | Successfully accessed /api/v1/users/login/ with status 200
+2025-01-19 20:04:28.704 | INFO | a6a020b9-3069-4dbf-89a2-97253ae3e54c | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:04:28.707 | INFO | 0421e4d8-f42c-480d-8cb7-cfb190b02dcc | Successfully accessed /api/v1/tasks/me/ with status 200
+2025-01-19 20:04:28.709 | INFO | a6a020b9-3069-4dbf-89a2-97253ae3e54c | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:04:28.714 | ERROR | 01e996ab-7016-4e26-8765-79cbbf698ff2 | Request to /api/v1/tasks/me/55/status/ failed: (sqlalchemy.dialects.postgresql.asyncpg.Error) <class 'asyncpg.exceptions.InvalidTextRepresentationError'>: invalid input value for enum taskstatus: "in_progress"
+[SQL: UPDATE tasks SET status=$1::taskstatus WHERE tasks.id = $2::INTEGER]
+[parameters: ('in_progress', 55)]
+(Background on this error at: https://sqlalche.me/e/20/dbapi)
+2025-01-19 20:04:28.784 | INFO | a6a020b9-3069-4dbf-89a2-97253ae3e54c | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:04:29.168 | INFO | 3020a76b-99ba-47b2-80e4-1b73a1f43de7 | Successfully accessed /api/v1/users/register/ with status 200
+2025-01-19 20:04:29.170 | INFO | a6a020b9-3069-4dbf-89a2-97253ae3e54c | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:04:29.552 | INFO | ff66f657-9f65-4938-85e1-b4bfc9cb1d86 | Successfully accessed /api/v1/users/login/ with status 200
+2025-01-19 20:04:29.554 | INFO | a6a020b9-3069-4dbf-89a2-97253ae3e54c | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:04:29.557 | INFO | 92e48d45-0393-4898-832e-dd0e089cc5eb | Successfully accessed /api/v1/tasks/me/ with status 200
+2025-01-19 20:04:29.559 | INFO | a6a020b9-3069-4dbf-89a2-97253ae3e54c | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:04:29.565 | INFO | 12ca33db-510b-4136-a4e3-62826df6316c | Successfully accessed /api/v1/tasks/me/update/ with status 200
+2025-01-19 20:04:29.592 | INFO | a6a020b9-3069-4dbf-89a2-97253ae3e54c | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:04:29.976 | INFO | 1b4a1f36-2ec5-46b9-aa85-6dd171d43e58 | Successfully accessed /api/v1/users/register/ with status 200
+2025-01-19 20:04:30.004 | INFO | a6a020b9-3069-4dbf-89a2-97253ae3e54c | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:04:30.388 | INFO | 688ca497-a21f-455b-bf5e-68de0a825519 | Successfully accessed /api/v1/users/register/ with status 200
+2025-01-19 20:04:30.391 | INFO | a6a020b9-3069-4dbf-89a2-97253ae3e54c | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:04:30.772 | INFO | 1b1b2a10-e38d-4cce-b6cd-069c5395decf | Successfully accessed /api/v1/users/login/ with status 200
+2025-01-19 20:04:30.800 | INFO | a6a020b9-3069-4dbf-89a2-97253ae3e54c | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:04:31.184 | INFO | 20a71d25-e266-442e-b66d-d57ddc68a7e9 | Successfully accessed /api/v1/users/register/ with status 200
+2025-01-19 20:04:31.186 | INFO | a6a020b9-3069-4dbf-89a2-97253ae3e54c | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:04:31.567 | INFO | ba0a5675-69d3-41a2-9e9a-2df6d35223e9 | Successfully accessed /api/v1/users/login/ with status 200
+2025-01-19 20:04:31.570 | INFO | a6a020b9-3069-4dbf-89a2-97253ae3e54c | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:04:31.573 | INFO | 472dbcd4-e5f0-45e3-af7f-c2e052bfb506 | Successfully accessed /api/v1/users/me/ with status 200
+2025-01-19 20:04:31.600 | INFO | a6a020b9-3069-4dbf-89a2-97253ae3e54c | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:04:31.984 | INFO | 177328b0-37b5-4013-8004-9e2aef4580f7 | Successfully accessed /api/v1/users/register/ with status 200
+2025-01-19 20:04:31.987 | INFO | a6a020b9-3069-4dbf-89a2-97253ae3e54c | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:04:32.368 | INFO | c67d8b5b-8953-4415-969b-f3bf49cae5e6 | Successfully accessed /api/v1/users/login/ with status 200
+2025-01-19 20:04:32.370 | INFO | a6a020b9-3069-4dbf-89a2-97253ae3e54c | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:04:32.373 | INFO | dc36cf08-7676-4d2d-b5de-eb740eeea7f8 | Successfully accessed /api/v1/users/me/delete/ with status 200
+2025-01-19 20:04:32.400 | INFO | a6a020b9-3069-4dbf-89a2-97253ae3e54c | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:04:32.784 | INFO | 7427287f-e7c6-437d-83f6-0bb928632682 | Successfully accessed /api/v1/users/register/ with status 200
+2025-01-19 20:04:32.786 | INFO | a6a020b9-3069-4dbf-89a2-97253ae3e54c | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:04:33.168 | INFO | 0fabc408-2aba-4954-886b-b3503e4eac64 | Successfully accessed /api/v1/users/login/ with status 200
+2025-01-19 20:04:33.170 | INFO | a6a020b9-3069-4dbf-89a2-97253ae3e54c | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:04:33.178 | INFO | 6c18cad5-33d2-4377-b9f4-87b0d8d8bb46 | Successfully accessed /api/v1/users/me/update/ with status 200
+2025-01-19 20:06:08.870 | INFO | f292d286-98c4-43ab-8806-a2dfcaad4cac | Database engine initialized.
+2025-01-19 20:06:08.870 | INFO | f03dbf89-abaa-4c89-86ae-c75df56c93c6 | Database engine initialized.
+2025-01-19 20:06:08.988 | INFO | cd2d0195-5f32-47e8-9780-7758706e9623 | Database connection test successful.
+2025-01-19 20:06:10.296 | WARNING | 0e4166fd-3463-4882-92eb-b279b0086de7 | Request to / failed with status 404
+2025-01-19 20:06:13.657 | INFO | b6ebc8eb-0d4f-4f1f-8b8d-40e6b768e130 | Successfully accessed /docs with status 200
+2025-01-19 20:06:13.806 | INFO | 478b4cfb-8af7-47f6-8061-8e454fb4da13 | Successfully accessed /openapi.json with status 200
+2025-01-19 20:06:21.984 | INFO | cd2d0195-5f32-47e8-9780-7758706e9623 | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:06:22.380 | INFO | bab528f5-a2fb-4a47-a0d3-e4cfe8e6e49b | Successfully accessed /api/v1/users/login/ with status 200
+2025-01-19 20:06:26.939 | INFO | cd2d0195-5f32-47e8-9780-7758706e9623 | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:06:26.961 | INFO | cf03eb52-1060-4e58-b32c-72461aa4e3b6 | Successfully accessed /api/v1/tasks/me/ with status 200
+2025-01-19 20:06:44.288 | INFO | cd2d0195-5f32-47e8-9780-7758706e9623 | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:06:44.291 | INFO | c5c780b4-1142-4c7a-b8db-399e547a17ba | Successfully accessed /api/v1/tasks/me/{task_id}/status/ with status 422
+2025-01-19 20:06:54.504 | INFO | cd2d0195-5f32-47e8-9780-7758706e9623 | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:06:54.516 | ERROR | 146dbcca-dd24-4f43-bd4b-788094061bdd | Request to /api/v1/tasks/me/{task_id}/status/ failed: (sqlalchemy.dialects.postgresql.asyncpg.Error) <class 'asyncpg.exceptions.InvalidTextRepresentationError'>: invalid input value for enum taskstatus: "completed"
+[SQL: UPDATE tasks SET status=$1::taskstatus WHERE tasks.id = $2::INTEGER]
+[parameters: ('completed', 2)]
+(Background on this error at: https://sqlalche.me/e/20/dbapi)
+2025-01-19 20:08:24.576 | INFO | cd2d0195-5f32-47e8-9780-7758706e9623 | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:08:24.586 | ERROR | 313a3c81-6a37-40ed-a980-34b47efa54ff | Request to /api/v1/tasks/me/{task_id}/status/ failed: (sqlalchemy.dialects.postgresql.asyncpg.Error) <class 'asyncpg.exceptions.InvalidTextRepresentationError'>: invalid input value for enum taskstatus: "new"
+[SQL: UPDATE tasks SET status=$1::taskstatus WHERE tasks.id = $2::INTEGER]
+[parameters: ('new', 2)]
+(Background on this error at: https://sqlalche.me/e/20/dbapi)
+2025-01-19 20:08:55.604 | INFO | 4222cab0-f37f-49ba-9b1c-17366c7d721e | Database engine initialized.
+2025-01-19 20:08:55.605 | INFO | acc0c7c0-149b-4308-b4df-79aa4545deb1 | Database engine initialized.
+2025-01-19 20:09:49.383 | INFO | 4e937878-6c7a-43d3-95bb-a9e82eac35eb | Database engine initialized.
+2025-01-19 20:09:49.383 | INFO | a800a6c0-9a38-485e-a16c-81f47234a2ad | Database engine initialized.
+2025-01-19 20:09:49.526 | INFO | fcea8b2f-d64e-4259-b1aa-a217e66c7186 | Database connection test successful.
+2025-01-19 20:09:52.611 | INFO | fcea8b2f-d64e-4259-b1aa-a217e66c7186 | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:09:52.650 | INFO | 9084b028-eb80-4f11-95b7-3596ce9d5320 | Successfully accessed /api/v1/tasks/me/{task_id}/status/ with status 200
+2025-01-19 20:10:05.636 | INFO | 8d98e354-c03a-4c9e-bcca-17df3eab001e | Database engine initialized.
+2025-01-19 20:10:05.636 | INFO | 2bae60a2-94ec-49cd-999b-c7fb17dc0a63 | Database engine initialized.
+2025-01-19 20:10:05.753 | INFO | a32580f1-834b-4f37-8d6f-9d8bec68c06b | Database connection test successful.
+2025-01-19 20:10:08.292 | INFO | a32580f1-834b-4f37-8d6f-9d8bec68c06b | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:10:08.329 | ERROR | 55ccd5e6-3734-4ca2-af8c-5088515a4c22 | Request to /api/v1/tasks/me/{task_id}/status/ failed: (sqlalchemy.dialects.postgresql.asyncpg.Error) <class 'asyncpg.exceptions.InvalidTextRepresentationError'>: invalid input value for enum taskstatus: "TaskStatus.NEW"
+[SQL: UPDATE tasks SET status=$1::taskstatus WHERE tasks.id = $2::INTEGER]
+[parameters: ('TaskStatus.NEW', 2)]
+(Background on this error at: https://sqlalche.me/e/20/dbapi)
+2025-01-19 20:12:45.697 | INFO | 08dabe8e-2f37-4a06-8aa2-82d138df222e | Database engine initialized.
+2025-01-19 20:12:45.697 | INFO | 8eecd17a-a7a1-4882-8660-95711147dd0e | Database engine initialized.
+2025-01-19 20:12:45.829 | INFO | 5a4562c7-c240-454a-a187-7756f93a890a | Database connection test successful.
+2025-01-19 20:12:51.982 | INFO | d7171f6f-b2db-490a-b224-621f90b3b1fd | Database engine initialized.
+2025-01-19 20:12:51.982 | INFO | ef9b899a-7ccd-45a4-bb35-5acd7ee376a7 | Database engine initialized.
+2025-01-19 20:12:52.141 | INFO | 5a4562c7-c240-454a-a187-7756f93a890a | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:12:52.543 | INFO | bc57edd7-ff26-437a-96b9-024a4741f045 | Successfully accessed /api/v1/users/register/ with status 200
+2025-01-19 20:12:52.546 | INFO | 5a4562c7-c240-454a-a187-7756f93a890a | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:12:52.928 | INFO | 8d8d5c49-7c84-4259-bcb7-9c6d54f130ed | Successfully accessed /api/v1/users/login/ with status 200
+2025-01-19 20:12:52.930 | INFO | 5a4562c7-c240-454a-a187-7756f93a890a | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:12:52.959 | INFO | 44e01359-cb28-4f88-ab09-6a0a8f408313 | Successfully accessed /api/v1/tasks/me/ with status 200
+2025-01-19 20:12:52.988 | INFO | 5a4562c7-c240-454a-a187-7756f93a890a | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:12:53.372 | INFO | b20ce65d-ad3c-4352-9ef9-2f167cae6938 | Successfully accessed /api/v1/users/register/ with status 200
+2025-01-19 20:12:53.374 | INFO | 5a4562c7-c240-454a-a187-7756f93a890a | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:12:53.756 | INFO | e1cd4d80-afad-43c1-84dc-10bcb83861d7 | Successfully accessed /api/v1/users/login/ with status 200
+2025-01-19 20:12:53.758 | INFO | 5a4562c7-c240-454a-a187-7756f93a890a | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:12:53.762 | INFO | 626c0922-e4c9-4b1f-8bf7-4b8a7bb25009 | Successfully accessed /api/v1/tasks/me/ with status 200
+2025-01-19 20:12:53.763 | INFO | 5a4562c7-c240-454a-a187-7756f93a890a | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:12:53.766 | INFO | 4dea691e-afb6-4992-9b92-06e45de30392 | Successfully accessed /api/v1/tasks/me/ with status 200
+2025-01-19 20:12:53.793 | INFO | 5a4562c7-c240-454a-a187-7756f93a890a | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:12:54.177 | INFO | 70d6f82d-7393-49d7-9b22-69f852d55d28 | Successfully accessed /api/v1/users/register/ with status 200
+2025-01-19 20:12:54.181 | INFO | 5a4562c7-c240-454a-a187-7756f93a890a | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:12:54.562 | INFO | 35bad2e2-447a-41e1-8618-bdf2004b15c4 | Successfully accessed /api/v1/users/login/ with status 200
+2025-01-19 20:12:54.564 | INFO | 5a4562c7-c240-454a-a187-7756f93a890a | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:12:54.568 | INFO | d87f5288-930b-42f3-ba96-fa1b60c341b2 | Successfully accessed /api/v1/tasks/me/ with status 200
+2025-01-19 20:12:54.569 | INFO | 5a4562c7-c240-454a-a187-7756f93a890a | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:12:54.572 | INFO | 38ccfe8f-3bce-471e-87d0-305b7cc913e2 | Successfully accessed /api/v1/tasks/me/ with status 200
+2025-01-19 20:12:54.599 | INFO | 5a4562c7-c240-454a-a187-7756f93a890a | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:12:54.984 | INFO | b906ca31-cef9-43fe-b134-abfcfd3ba3e0 | Successfully accessed /api/v1/users/register/ with status 200
+2025-01-19 20:12:54.986 | INFO | 5a4562c7-c240-454a-a187-7756f93a890a | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:12:55.367 | INFO | fa374828-c964-4ba4-9794-47b1fbed0f0e | Successfully accessed /api/v1/users/login/ with status 200
+2025-01-19 20:12:55.369 | INFO | 5a4562c7-c240-454a-a187-7756f93a890a | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:12:55.373 | INFO | 6fbb0c25-6562-42f2-9eb4-ed51efbe6750 | Successfully accessed /api/v1/tasks/me/ with status 200
+2025-01-19 20:12:55.374 | INFO | 5a4562c7-c240-454a-a187-7756f93a890a | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:12:55.378 | INFO | f43aec5f-c5e1-4101-9c98-e14c9c228f37 | Successfully accessed /api/v1/tasks/me/60/ with status 200
+2025-01-19 20:12:55.405 | INFO | 5a4562c7-c240-454a-a187-7756f93a890a | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:12:55.790 | INFO | 4ecae140-d49b-4319-ad49-797e10e7c9e5 | Successfully accessed /api/v1/users/register/ with status 200
+2025-01-19 20:12:55.792 | INFO | 5a4562c7-c240-454a-a187-7756f93a890a | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:12:56.175 | INFO | 8c4e5476-e05d-4ee1-bd55-c8a3f2373898 | Successfully accessed /api/v1/users/login/ with status 200
+2025-01-19 20:12:56.177 | INFO | 5a4562c7-c240-454a-a187-7756f93a890a | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:12:56.180 | INFO | 21534519-a9b8-450e-9f91-e3c9ef20becd | Successfully accessed /api/v1/tasks/me/ with status 200
+2025-01-19 20:12:56.182 | INFO | 5a4562c7-c240-454a-a187-7756f93a890a | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:12:56.187 | INFO | 6982bd4a-0f2a-4f3f-a9a3-3f917f716bb8 | Successfully accessed /api/v1/tasks/me/61/status/ with status 200
+2025-01-19 20:12:56.214 | INFO | 5a4562c7-c240-454a-a187-7756f93a890a | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:12:56.599 | INFO | 0547e9d3-3ced-4ff0-9bc7-2e1afc42a90c | Successfully accessed /api/v1/users/register/ with status 200
+2025-01-19 20:12:56.602 | INFO | 5a4562c7-c240-454a-a187-7756f93a890a | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:12:56.984 | INFO | dcfc8bc9-d239-4342-bd6f-d02d7492a1b7 | Successfully accessed /api/v1/users/login/ with status 200
+2025-01-19 20:12:56.986 | INFO | 5a4562c7-c240-454a-a187-7756f93a890a | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:12:56.989 | INFO | 8835a2a9-4976-4c38-80c9-0f4ca1edd87f | Successfully accessed /api/v1/tasks/me/ with status 200
+2025-01-19 20:12:56.991 | INFO | 5a4562c7-c240-454a-a187-7756f93a890a | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:12:56.997 | INFO | 227c5ad7-2142-4f58-b670-2125c3a48ef0 | Successfully accessed /api/v1/tasks/me/update/ with status 200
+2025-01-19 20:12:57.024 | INFO | 5a4562c7-c240-454a-a187-7756f93a890a | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:12:57.408 | INFO | bc4c187d-f529-4223-9235-c40761df48c2 | Successfully accessed /api/v1/users/register/ with status 200
+2025-01-19 20:12:57.435 | INFO | 5a4562c7-c240-454a-a187-7756f93a890a | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:12:57.819 | INFO | 11ae5561-ebfc-47e2-8788-c54eab934492 | Successfully accessed /api/v1/users/register/ with status 200
+2025-01-19 20:12:57.821 | INFO | 5a4562c7-c240-454a-a187-7756f93a890a | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:12:58.203 | INFO | 2521dab3-778e-42f2-9807-846759baf6e3 | Successfully accessed /api/v1/users/login/ with status 200
+2025-01-19 20:12:58.231 | INFO | 5a4562c7-c240-454a-a187-7756f93a890a | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:12:58.615 | INFO | 12b6003a-a09b-4f22-919f-768c45e082b0 | Successfully accessed /api/v1/users/register/ with status 200
+2025-01-19 20:12:58.617 | INFO | 5a4562c7-c240-454a-a187-7756f93a890a | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:12:58.999 | INFO | 072fe5c8-fdc6-452d-b913-b3ba1265108f | Successfully accessed /api/v1/users/login/ with status 200
+2025-01-19 20:12:59.001 | INFO | 5a4562c7-c240-454a-a187-7756f93a890a | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:12:59.003 | INFO | fcb680d0-8648-410b-a663-5f663da6ca65 | Successfully accessed /api/v1/users/me/ with status 200
+2025-01-19 20:12:59.031 | INFO | 5a4562c7-c240-454a-a187-7756f93a890a | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:12:59.415 | INFO | 1e089e85-6be0-4587-bb3e-a6bde4a076a8 | Successfully accessed /api/v1/users/register/ with status 200
+2025-01-19 20:12:59.417 | INFO | 5a4562c7-c240-454a-a187-7756f93a890a | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:12:59.799 | INFO | a08d0502-fd41-41ca-8178-80dd9d042fce | Successfully accessed /api/v1/users/login/ with status 200
+2025-01-19 20:12:59.801 | INFO | 5a4562c7-c240-454a-a187-7756f93a890a | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:12:59.804 | INFO | 8f3e408c-0de4-4074-9430-26e067afbb4a | Successfully accessed /api/v1/users/me/delete/ with status 200
+2025-01-19 20:12:59.834 | INFO | 5a4562c7-c240-454a-a187-7756f93a890a | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:13:00.219 | INFO | 6425d51a-5bb7-414b-a6c4-40355b99b5a7 | Successfully accessed /api/v1/users/register/ with status 200
+2025-01-19 20:13:00.221 | INFO | 5a4562c7-c240-454a-a187-7756f93a890a | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:13:00.602 | INFO | f7ee1948-3fcb-422c-b01c-5dd2516e3aaf | Successfully accessed /api/v1/users/login/ with status 200
+2025-01-19 20:13:00.605 | INFO | 5a4562c7-c240-454a-a187-7756f93a890a | Successfully connected to the database at postgresql+asyncpg://postgres:***@127.0.0.1:5432/postgres.
+2025-01-19 20:13:00.613 | INFO | 5acf443e-e01f-4910-8614-2da7d3e68009 | Successfully accessed /api/v1/users/me/update/ with status 200

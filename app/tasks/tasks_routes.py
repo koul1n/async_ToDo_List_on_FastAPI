@@ -112,7 +112,7 @@ async def change_status_task_route(
         db=db, task_id=task.id, user_id=user_id, new_status=task.new_status
     )
 
-    return {"message": f"Статус задачи изменен."}
+    return {"message": f"Статус задачи изменен на {task.new_status.value}"}
 
 
 @router.patch("/me/update/", response_model=TaskResponse)

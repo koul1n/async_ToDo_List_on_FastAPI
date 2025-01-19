@@ -120,7 +120,7 @@ async def test_delete_task(async_client, user_data, task_data):
 
 
 @pytest.mark.asyncio
-async def test_complete_task(async_client, user_data, task_data):
+async def test_change_status_task(async_client, user_data, task_data):
 
     create_user_response = await async_client.post(
         f"{ENDPOINT}/users/register/", json=user_data
