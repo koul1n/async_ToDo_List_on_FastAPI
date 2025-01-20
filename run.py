@@ -11,6 +11,7 @@ from app.database import settings
 import sys
 from uuid import uuid4
 
+logger.add(sys.stdout, catch=True)
 
 if __name__ == "__main__":
     """
