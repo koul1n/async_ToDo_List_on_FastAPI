@@ -1,3 +1,18 @@
+"""
+Этот файл содержит middleware для логирования запросов и ответов в приложении FastAPI.
+Он автоматически записывает информацию о запросах, включая путь запроса, статус ответа,
+а также обрабатывает ошибки и исключения, логируя их с соответствующими уровнями.
+
+Основные компоненты:
+    - log_middleware: Middleware, которое логирует информацию о запросах и ответах, включая ошибки.
+
+    Логирование:
+        - Для успешных запросов (коды 200-299) записывается информация о пути запроса и статусе ответа.
+        - Для неудачных запросов (коды 401, 403, 404) записывается предупреждение.
+        - В случае ошибки записывается информация о неудачном запросе с подробным описанием ошибки.
+
+"""
+
 from fastapi import Request, status
 from fastapi.responses import JSONResponse
 from loguru import logger
@@ -13,6 +28,7 @@ logger.add(
     compression="zip",
     format="{time:YYYY-MM-DD HH:mm:ss.SSS} | {level} | {extra[log_id]} | {message}",
 )
+
 
 async def log_middleware(request: Request, call_next: Callable):
     """
@@ -40,15 +56,15 @@ async def log_middleware(request: Request, call_next: Callable):
             status.HTTP_404_NOT_FOUND,
         ]:
             logger.bind(log_id=log_id).warning(
-                "Request to %s failed with status %d", request.url.path, response.status_code
+                f"Request to {request.url.path} failed with status {response.status_code}"
             )
         else:
             logger.bind(log_id=log_id).info(
-                "Successfully accessed %s with status %d", request.url.path, response.status_code
+                f"Successfully accessed {request.url.path} with status {response.status_code}"
             )
 
     except Exception as ex:
-        logger.bind(log_id=log_id).error("Request to %s failed: %s", request.url.path, ex)
+        logger.bind(log_id=log_id).error(f"Request to {request.url.path} failed: {ex}")
         response = JSONResponse(
             content={"success": False, "error": str(ex)}, status_code=status.HTTP_500_INTERNAL_SERVER_ERROR
         )

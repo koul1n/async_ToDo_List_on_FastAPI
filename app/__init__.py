@@ -25,7 +25,7 @@ async def lifespan(app: FastAPI):
         yield
     except Exception as e:
         logger.bind(log_id=database_helper.log_id).error(
-            "Lifespan startup failed: %s", e
+            f"Lifespan startup failed: {str(e)}"
         )
         raise e
 
