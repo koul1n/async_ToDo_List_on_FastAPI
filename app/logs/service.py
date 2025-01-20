@@ -66,7 +66,7 @@ async def log_middleware(request: Request, call_next: Callable):
     except Exception as ex:
         logger.bind(log_id=log_id).error(f"Request to {request.url.path} failed: {ex}")
         response = JSONResponse(
-            content={"success": False, "error": str(ex)}, status_code=500
+            content={"success": False, "error": str(ex)}, status_code=status.HTTP_500_INTERNAL_SERVER_ERROR
         )
 
     return response
