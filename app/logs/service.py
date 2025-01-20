@@ -30,7 +30,7 @@ logger.add(
 )
 
 
-async def log_middleware(request: Request, call_next : Callable):
+async def log_middleware(request: Request, call_next: Callable):
     """
     Middleware для логирования запросов и ответов.
 

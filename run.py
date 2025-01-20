@@ -21,5 +21,5 @@ if __name__ == "__main__":
     try:
         uvicorn.run(app, host=settings.SERVER_HOST, port=settings.SERVER_PORT)
     except Exception as ex:
-        logger.bind(log_id = str(uuid4())).error(f"Error starting the server: {ex}")
+        logger.bind(log_id=str(uuid4())).error(f"Error starting the server: {ex}")
         sys.exit(settings.EXIT_CODE_ERROR)
