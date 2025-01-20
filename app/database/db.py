@@ -55,9 +55,9 @@ class Database:
             logger.bind(log_id=self.log_id).info("Database connection test successful.")
         except SQLAlchemyError as e:
             logger.bind(log_id=self.log_id).error(
-                f"Database connection test failed: {str(e)}"
+                "Database connection test failed: %s", e
             )
-            raise ConnectionError(f"Database connection failed: {str(e)}")
+            raise ConnectionError("Database connection failed: %s", e)
 
     async def get_db(self):
         """
@@ -70,7 +70,7 @@ class Database:
         """
         async with self.async_session() as session:
             logger.bind(log_id=self.log_id).info(
-                f"Successfully connected to the database at {self.engine.url}."
+                "Successfully connected to the database at %s.", self.engine.url
             )
             yield session
 
