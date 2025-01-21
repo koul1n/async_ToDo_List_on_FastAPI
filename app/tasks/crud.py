@@ -1,3 +1,7 @@
+"""
+В данном файле содержаться crud функции
+для работы с задачами.
+"""
 from datetime import datetime
 from sqlalchemy import delete
 from sqlalchemy.ext.asyncio import AsyncSession
