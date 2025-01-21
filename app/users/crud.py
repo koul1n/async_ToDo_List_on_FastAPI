@@ -2,6 +2,7 @@
 В данном файле содержаться crud функции
 для работы с пользователями.
 """
+
 from fastapi import HTTPException, status
 from pydantic import EmailStr
 from sqlalchemy import delete

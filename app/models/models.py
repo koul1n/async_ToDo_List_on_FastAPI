@@ -21,10 +21,14 @@ from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 
 class Base(DeclarativeBase):
     """
+    Атрибуты:
+        id (int): Уникальный идентификатор.
     Базовый класс для всех моделей данных.
+
     """
 
-    pass
+    __abstract__ = True
+    id: Mapped[int] = mapped_column(primary_key=True)
 
 
 class Task(Base):
@@ -32,7 +36,7 @@ class Task(Base):
     Модель для задачи.
 
     Атрибуты:
-        id (int): Уникальный идентификатор задачи.
+        id (int): Уникальный идентификатор задачи (наследуется от Base).
         title (str): Заголовок задачи.
         description (str): Описание задачи.
         status (TaskStatus): Статус задачи (например, NEW).
@@ -47,7 +51,6 @@ class Task(Base):
 
     __tablename__ = "tasks"
 
-    id: Mapped[int] = mapped_column(primary_key=True)
     title: Mapped[str] = mapped_column(nullable=False)
     description: Mapped[str] = mapped_column()
     status: Mapped[TaskStatus] = mapped_column(
@@ -66,7 +69,7 @@ class User(Base):
     Модель для пользователя.
 
     Атрибуты:
-        id (int): Уникальный идентификатор пользователя.
+        id (int): Уникальный идентификатор пользователя (Наследуется от Base).
         username (str): Имя пользователя.
         email (str): Электронная почта пользователя.
         password (str): Пароль пользователя.
@@ -78,7 +81,6 @@ class User(Base):
 
     __tablename__ = "users"
 
-    id: Mapped[int] = mapped_column(primary_key=True)
     username: Mapped[str] = mapped_column(nullable=False)
     email: Mapped[str] = mapped_column(nullable=False)
     password: Mapped[str] = mapped_column(nullable=False)

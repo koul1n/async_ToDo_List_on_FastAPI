@@ -51,14 +51,14 @@ async def create_user_route(
     user: UserCreate, db: AsyncSession = Depends(database_helper.get_db)
 ):
     """
-        Регистрирует нового пользователя в системе.
+    Регистрирует нового пользователя в системе.
 
-        Атрибуты:
-            user (UserCreate): Данные для создания пользователя (имя, email, пароль).
-            db (AsyncSession): Сессия базы данных.
+    Атрибуты:
+        user (UserCreate): Данные для создания пользователя (имя, email, пароль).
+        db (AsyncSession): Сессия базы данных.
 
-        Возвращает:
-            UserResponse: Информация о созданном пользователе.
+    Возвращает:
+        UserResponse: Информация о созданном пользователе.
     """
     new_user = await create_user(
         db=db, username=user.username, email=user.email, password=user.password
@@ -73,15 +73,15 @@ async def update_user_route(
     current_user: dict = Depends(get_current_user),
 ):
     """
-        Обновляет информацию о текущем пользователе.
+    Обновляет информацию о текущем пользователе.
 
-        Атрибуты:
-            user_update (UserUpdate): Новые данные пользователя (имя, email).
-            db (AsyncSession): Сессия базы данных.
-            current_user (dict): Информация о текущем авторизованном пользователе.
+    Атрибуты:
+        user_update (UserUpdate): Новые данные пользователя (имя, email).
+        db (AsyncSession): Сессия базы данных.
+        current_user (dict): Информация о текущем авторизованном пользователе.
 
-        Возвращает:
-            UserResponse: Обновленные данные пользователя.
+    Возвращает:
+        UserResponse: Обновленные данные пользователя.
     """
     user_id = int(current_user["sub"])
 
@@ -100,14 +100,14 @@ async def get_user_info_route(
     current_user: dict = Depends(get_current_user),
 ):
     """
-        Получает информацию о текущем пользователе.
+    Получает информацию о текущем пользователе.
 
-        Атрибуты:
-            db (AsyncSession): Сессия базы данных.
-            current_user (dict): Информация о текущем авторизованном пользователе.
+    Атрибуты:
+        db (AsyncSession): Сессия базы данных.
+        current_user (dict): Информация о текущем авторизованном пользователе.
 
-        Возвращает:
-            UserResponse: Данные текущего пользователя.
+    Возвращает:
+        UserResponse: Данные текущего пользователя.
     """
 
     user_id = int(current_user["sub"])
@@ -122,14 +122,14 @@ async def delete_user_route(
     current_user: dict = Depends(get_current_user),
 ):
     """
-       Удаляет текущего пользователя из системы.
+    Удаляет текущего пользователя из системы.
 
-       Атрибуты:
-           db (AsyncSession): Сессия базы данных.
-           current_user (dict): Информация о текущем авторизованном пользователе.
+    Атрибуты:
+        db (AsyncSession): Сессия базы данных.
+        current_user (dict): Информация о текущем авторизованном пользователе.
 
-       Возвращает:
-           dict: Подтверждение удаления пользователя.
+    Возвращает:
+        dict: Подтверждение удаления пользователя.
     """
     user_id = int(current_user["sub"])
 
