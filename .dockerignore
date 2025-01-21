@@ -1,6 +1,33 @@
+
 .git
-Dockerfile
-.idea
-.venv
+
+.idea/
+
+.venv/
+env/
+venv/
+
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+*.log
+
 README.md
 
+.DS_Store
+
+*.swp
+*.swo
+
+.vscode/
+
+# Включить игнорирование poetry lock файлов, если вы не хотите их включать в образ
+poetry.lock
+pyproject.toml
+
+
+tests/
+docs/
+*.md
