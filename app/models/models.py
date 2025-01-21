@@ -15,7 +15,7 @@
 
 from datetime import datetime
 from app.tasks.schemas import TaskStatus
-from sqlalchemy import ForeignKey, func, Enum
+from sqlalchemy import ForeignKey, func, Enum, Text
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 
 
@@ -52,7 +52,7 @@ class Task(Base):
     __tablename__ = "tasks"
 
     title: Mapped[str] = mapped_column(nullable=False)
-    description: Mapped[str] = mapped_column()
+    description: Mapped[str] = mapped_column(Text, default="", server_default="")
     status: Mapped[TaskStatus] = mapped_column(
         Enum(TaskStatus), default=TaskStatus.NEW, nullable=False
     )
