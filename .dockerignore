@@ -23,7 +23,6 @@ README.md
 
 .vscode/
 
-# Включить игнорирование poetry lock файлов, если вы не хотите их включать в образ
 poetry.lock
 pyproject.toml
 
