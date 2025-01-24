@@ -60,8 +60,8 @@ class Task(Base):
     deadline: Mapped[datetime | None] = mapped_column(nullable=True)
 
     # Ссылка на пользователя
-    owner_id: Mapped[int] = mapped_column(ForeignKey("users.id"), nullable=False)
-    owner: Mapped["User"] = relationship("User", back_populates="tasks")
+    owner_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
+    owner: Mapped["User"] = relationship(back_populates="tasks")
 
 
 class User(Base):
@@ -86,7 +86,6 @@ class User(Base):
     password: Mapped[str] = mapped_column(nullable=False)
     is_active: Mapped[bool] = mapped_column(default=True)
 
-    # Связь с задачами
     tasks: Mapped[list["Task"]] = relationship(
-        "Task", back_populates="owner", cascade="all, delete"
+        back_populates="owner"
     )
