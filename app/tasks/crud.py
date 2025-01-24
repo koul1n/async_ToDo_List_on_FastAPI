@@ -77,7 +77,6 @@ async def update_task(
     if deadline:
         task.deadline = deadline
 
-    db.add(task)
     await db.commit()
     await db.refresh(task)
     return task

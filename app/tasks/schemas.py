@@ -4,7 +4,6 @@ from datetime import datetime
 from enum import Enum
 from pydantic import BaseModel, ConfigDict, constr
 
-
 class TaskStatus(str, Enum):
     """
     Перечисление статусов задачи.

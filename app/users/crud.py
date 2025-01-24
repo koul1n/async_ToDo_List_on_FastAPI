@@ -67,7 +67,6 @@ async def update_user_info(
     if new_email:
         await change_email(db=db, user=user, new_email=new_email)
 
-    db.add(user)
     await db.commit()
     await db.refresh(user)
 
